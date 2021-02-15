@@ -2,6 +2,10 @@
   import Slider from "./Slider.svelte";
   import Collapse from "./Collapse.svelte";
   import { variables } from "../stores/vibrancy.js";
+  import { scaleOrdinal } from "d3-scale";
+  const seriesNames = ["Reseach and Development", "Economy", "Society"];
+  const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
+  const scale = scaleOrdinal().domain(seriesNames).range(seriesColors);
 
   let updatePillar = (event) => {
     console.log("updating");
@@ -33,7 +37,7 @@
     {#each $variables as d}
       <div class="container">
         <div class="collapse">
-          <Collapse headerText="{d.metric_name}">
+          <Collapse headerText="{d.metric_name}" color="{scale(d.metric_name)}">
             {#each d.metadata as v}
               <div class="slider-container">
                 <div class="slider pillar">

@@ -2,6 +2,7 @@
   import { variables, data, methodology_year } from "../stores/vibrancy.js";
   import { onMount } from "svelte";
   import YearSlider from "./YearSlider.svelte";
+  import Collapse from "./Collapse.svelte";
   import Table from "./Table.svelte";
   import { group } from "d3-array";
   let variable_names = [];
@@ -30,7 +31,7 @@
     });
     table_values = table_values;
     // console.log(country_values);
-    console.log(Object.keys(table_values[0]));
+    console.log($variables);
     // console.log(filtered);
   };
 
@@ -55,10 +56,22 @@
 {#if mounted}
   <div class="overall-container">
     <div class="upper">
-      <h1>Data Glossary and Methodology</h1>
-      <YearSlider methodology="true" />
+      <h1 class="section-header">Data Glossary and Methodology</h1>
+      <h2>Data Dictionary</h2>
+      {#each $variables as v}
+        <ul>
+          <li>
+            <Collapse headerText="{v.metric_name}">
+              {#each v.metadata as d}
+                <li>{d.metric_name}: {d.Definition}</li>
+              {/each}
+            </Collapse>
+          </li>
+        </ul>
+      {/each}
     </div>
     <div class="table">
+      <YearSlider methodology="true" />
       <Table
         data="{table_values}"
         keys="{Object.keys(table_values[0])}"
@@ -72,6 +85,7 @@
   .overall-container {
     width: 90%;
     margin: 0 auto;
+    pointer-events: all;
   }
 
   .upper {
@@ -81,6 +95,11 @@
 
   .table {
     width: 100%;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
     margin: 0 auto;
   }
 </style>

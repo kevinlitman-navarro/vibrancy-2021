@@ -3,6 +3,7 @@
   import AxisX from "./AxisX.svelte";
   import AxisY from "./AxisY.svelte";
   import YearSlider from "./YearSlider.svelte";
+  import Tooltip from "./Tooltip.svelte";
   import Annotation from "./Annotation.svelte";
   import Bars from "./Bars.svelte";
   import { data } from "../stores/vibrancy.js";
@@ -183,6 +184,18 @@
     console.log(flatten(series));
   };
 
+  let current_x;
+  let current_y;
+  let show;
+  const global_axis_position = 0;
+  let pillar;
+  let type;
+  let updateTooltip = (event) => {
+    current_x = event.detail.current_x;
+    current_y = event.detail.current_y;
+    show = event.detail.show;
+    type = event.detail.type;
+  };
   onMount(() => {
     updateCountryData();
     updateWeights();
@@ -224,14 +237,24 @@
         padding="{{ top: 0, right: 0, bottom: 20, left: 140 }}"
       >
         <Svg>
-          <!-- <AxisX /> -->
+          <AxisX axis_position="{global_axis_position}" />
           <AxisY textAnchor="end" spacing="136" text_size="" />
         </Svg>
         <Html>
           <Annotation content="Click a bar to visit that country's profile" />
+          <!-- <Tooltip
+            type="global"
+            x="{current_x}"
+            y="{current_y}"
+            show_tooltip="{show}"
+          /> -->
         </Html>
         <Svg>
-          <Bars additional_data="{country_cut}" stacked="{true}" />
+          <Bars
+            additional_data="{country_cut}"
+            stacked="{true}"
+            on:message="{updateTooltip}"
+          />
         </Svg>
       </LayerCake>
     </div>

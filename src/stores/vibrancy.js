@@ -11,3 +11,4 @@ export const ranked_metric = writable(null);
 export const temporal_metric_1 = writable(null);
 export const temporal_metric_2 = writable(null);
 export const methodology_year = writable(2020);
+export const tooltip_text = writable(null);

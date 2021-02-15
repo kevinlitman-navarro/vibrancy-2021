@@ -2,12 +2,12 @@
   // based on suggestions from:
   // Inclusive Components by Heydon Pickering https://inclusive-components.design/collapsible-sections/
   export let headerText;
-
+  export let color;
   let expanded = false;
 </script>
 
 <div class="collapsible">
-  <h3>
+  <h3 style="color:{color}">
     <button aria-expanded="{expanded}" on:click="{() => (expanded = !expanded)}"
       >{headerText}
       <svg viewBox="0 0 10 10" focusable="false">

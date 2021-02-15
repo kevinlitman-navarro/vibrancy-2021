@@ -2,7 +2,7 @@
   import { getContext } from "svelte";
 
   const { width, height, xScale, yScale, yRange } = getContext("LayerCake");
-
+  export let chart;
   export let gridlines = true;
   export let formatTick = (d) => d;
   export let baseline = false;
@@ -12,6 +12,7 @@
   export let yTick = 16;
   export let dxTick = 0;
   export let dyTick = 0;
+  export let axis_position = 1;
 
   $: tickVals = Array.isArray(ticks)
     ? ticks

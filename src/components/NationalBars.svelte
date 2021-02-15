@@ -3,6 +3,7 @@
   import AxisX from "./AxisX.svelte";
   import AxisY from "./AxisY.svelte";
   import Annotation from "./Annotation.svelte";
+  import Tooltip from "./Tooltip.svelte";
   import YearSlider from "./YearSlider.svelte";
   import Bars from "./Bars.svelte";
   import { data } from "../stores/vibrancy.js";
@@ -13,7 +14,7 @@
     number_of_metrics,
     ranked_metric,
   } from "../stores/vibrancy.js";
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
   import { group, mean, ascending, sum, descending, filter } from "d3-array";
   import { stack } from "d3-shape";
   import { scaleBand, scaleOrdinal } from "d3-scale";
@@ -30,6 +31,8 @@
   let temp;
   let ranked_data;
   let ranked_values;
+  const dispatch = createEventDispatcher();
+  import codebook from "../data/demo/codebook.csv";
 
   const seriesNames = ["Research and Development", "Economy", "Society"];
 
@@ -97,6 +100,18 @@
     // console.log(text_sorted[0], ranked_values[0]);
   };
 
+  let current_x;
+  let current_y;
+  let show;
+  let pillar;
+  let type;
+  let updateTooltip = (event) => {
+    current_x = event.detail.current_x;
+    current_y = event.detail.current_y;
+    show = event.detail.show;
+    type = event.detail.type;
+  };
+
   onMount(() => {
     updateCountryData();
     mounted = true;
@@ -142,7 +157,14 @@
             data="{chart_values}"
             padding="{{ top: 0, right: 0, bottom: 20, left: 180 }}"
           >
-            <Html>
+            <Html pointerEvents="{false}">
+              {#if type == "national"}
+                <Tooltip
+                  x="{current_x}"
+                  y="{current_y}"
+                  show_tooltip="{show}"
+                />
+              {/if}
               <Annotation
                 content="Click a bar to see where a country ranks on that variable"
               />
@@ -152,7 +174,11 @@
               <AxisY textAnchor="end" text_size=".8" spacing="175" />
             </Svg>
             <Svg>
-              <Bars additional_data="{single_country_cut}" stacked="{false}" />
+              <Bars
+                additional_data="{single_country_cut}"
+                stacked="{false}"
+                on:message="{updateTooltip}"
+              />
             </Svg>
           </LayerCake>
         </div>
@@ -160,7 +186,10 @@
     </div>
     <div class="chart-container rank-container shadow border-left-primary">
       <div class="chart-inner">
-        <h3>{$ranked_metric}, {$national_year}</h3>
+        <h3>
+          {codebook.find((d) => d.shortname_scaled == $ranked_metric)
+            .metric_name}, {$national_year}
+        </h3>
         <span
           >Rank: {text_sorted.indexOf(
             text_sorted.find((d) => {
@@ -175,15 +204,25 @@
           xDomain="{[0, null]}"
           yDomain="{ranked_values.map((d) => d.country_name)}"
           data="{ranked_values}"
-          padding="{{ top: 0, right: 0, bottom: 20, left: 100 }}"
+          padding="{{ top: 0, right: 0, bottom: 0, left: 0 }}"
         >
+          <Html pointerEvents="{false}">
+            {#if type == "rank"}
+              <Tooltip
+                type="rank"
+                x="{current_x}"
+                y="{current_y}"
+                show_tooltip="{show}"
+              />
+            {/if}
+          </Html>
           <!-- <Svg>
           <AxisX />
           <AxisY />
         </Svg> -->
 
           <Svg>
-            <Bars ranked="{true}" />
+            <Bars ranked="{true}" on:message="{updateTooltip}" />
           </Svg>
         </LayerCake>
       </div>
