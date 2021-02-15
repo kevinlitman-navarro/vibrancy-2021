@@ -4,7 +4,7 @@
     id: d,
     label: d,
   }));
-  const value = "Global";
+  let value = "Global";
 </script>
 
 <h1>Global Vibrancy Tool</h1>
@@ -30,4 +30,9 @@
 <AnnotatedToggle options="{options}" value="{value}" />
 
 <style>
+  h1 {
+    font-family: "Circular Std";
+    color: var(--dark-blue);
+    font-weight: 700;
+  }
 </style>

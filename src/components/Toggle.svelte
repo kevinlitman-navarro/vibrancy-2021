@@ -1,11 +1,14 @@
 <script>
+  import { toggle } from "../stores/vibrancy.js";
   export let options = [];
-  export let value = null;
+  export let value = $toggle;
   export let onChange = () => {};
 
   const onChangeLocal = (option) => {
     onChange(option);
     value = option.id;
+    console.log(value);
+    $toggle = value;
   };
 </script>
 
@@ -13,7 +16,7 @@
   {#each options as option}
     <button
       class="option"
-      class:selected="{option.id == value}"
+      class:selected="{option.id == $toggle}"
       on:click="{() => onChangeLocal(option)}"
     >
       {option.label}
@@ -31,8 +34,8 @@
   }
   .option.selected,
   .option.selected:hover {
-    background: var(--accent-color);
-    color: blue;
+    background: var(--dark-blue);
+    color: var(--white);
   }
 
   /* gravy */
@@ -42,9 +45,9 @@
     appearance: none;
     background: none;
     font-weight: 600;
-    font-size: 0.9em;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    font-size: 1.2em;
+    color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
     border-radius: 0;
     outline: none;
     cursor: pointer;

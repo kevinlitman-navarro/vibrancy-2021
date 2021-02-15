@@ -1,8 +1,9 @@
 <script>
   import GlobalSliders from "./GlobalSliders.svelte";
+  import GlobalButton from "./GlobalButton.svelte";
 </script>
 
-<div>
+<div class="upper">
   <h2>Importance of Metrics</h2>
   <div class="explanation">
     <p>
@@ -10,8 +11,29 @@
       graph below will automatically update to reflect your choices.
     </p>
   </div>
+  <div class="buttons">
+    <div>
+      <GlobalButton command="All weights to midpoint" />
+    </div>
+    <div>
+      <GlobalButton command="Only per capita metrics" />
+    </div>
+    <div>
+      <GlobalButton command="Only absolute metrics" />
+    </div>
+  </div>
 </div>
-<GlobalSliders />
+<div class="lower">
+  <GlobalSliders />
+</div>
 
 <style>
+  .buttons {
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+  }
+  div.buttons > * {
+    cursor: pointer;
+  }
 </style>

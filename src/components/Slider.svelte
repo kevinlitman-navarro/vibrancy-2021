@@ -16,16 +16,25 @@
     });
   }
 
-  $: update(multiplier), console.log($variables);
+  $: update(multiplier);
 </script>
 
-<span>{variable}</span>
-<p>{multiplier}</p>
+{#if variable != "Research and Development" && variable != "Economy" && variable != "Society"}
+  <span>{variable}</span>
+{/if}
+
+{#if variable == "Research and Development"}
+  <span class="low annotation">Low</span>
+{/if}
+{#if variable == "Research and Development"}
+  <span class="high annotation">High importance</span>
+{/if}
+<!-- <p>{multiplier}</p> -->
 <input
   name="{name}"
   id="{id}"
   type="range"
-  step=".2"
+  step=".1"
   max="1"
   min="0"
   list="tickmarks"
@@ -34,11 +43,31 @@
 
 <datalist id="tickmarks">
   <option value="0"></option>
+  <option value=".1"></option>
   <option value=".2"></option>
+  <option value=".3"></option>
   <option value=".4"></option>
+  <option value=".5"></option>
   <option value=".6"></option>
+  <option value=".7"></option>
   <option value=".8"></option>
+  <option value=".9"></option>
   <option value="1"></option>
 </datalist>
 
-<style></style>
+<style>
+  .annotation {
+    position: absolute;
+    display: inline-block;
+  }
+
+  .low {
+    text-align: right;
+    transform: translate(-1em, 1em);
+  }
+
+  .high {
+    text-align: left;
+    transform: translate(4em, 1em);
+  }
+</style>
