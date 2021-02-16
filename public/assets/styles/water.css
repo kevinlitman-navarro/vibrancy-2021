@@ -1,6 +1,6 @@
 /* adapted from https://github.com/kognise/water.css */
 :root {
-  --body-font: "Source Sans Pro";
+  --body-font: "Circular";
   --background-body: #fff;
   --background-ui: #f7f7f7;
   --background-alt: #f7f7f7;
@@ -31,21 +31,21 @@ body {
   background: var(--background-body);
   font-family: var(--body-font);
   text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1, "onum" 0, "liga" 0, "tnum" 1;
+  /* font-feature-settings: "kern" 1, "onum" 0, "liga" 0, "tnum" 1; */
 }
 
 h1 {
-  font-family: "Circular Std";
+  font-family: "Circular";
   font-weight: 700;
 }
 
 h2 {
-  font-family: "Circular Std";
+  font-family: "Circular";
   font-weight: 800;
 }
 
 h3 {
-  font-family: "Circular Std";
+  font-family: "Circular";
   font-weight: 300;
 }
 
@@ -59,15 +59,16 @@ h6 {
 }
 p {
   margin: 1rem 0;
-  font-family: "Source Sans Pro";
+  font-family: "Circular";
+  font-weight:300;
 }
 
 text {
-  font-family: "Source Sans Pro";
+  font-family: "Circular";
 }
 
 input.button {
-  font-family: "Source Sans Pro";
+  font-family: "Circular";
   font-weight: 600;
   border-radius: 0;
   border: var(--light-plum) solid 1px;

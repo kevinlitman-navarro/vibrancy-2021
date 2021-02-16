@@ -17,33 +17,9 @@
 */
 
 @font-face {
-  font-family: "Circular Std";
-  src: url("../hai-fonts/circular/CircularStd-Book.otf") format("otf");
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  font-display: swap;
-}
-
-/* @font-face {
-	font-family: 'National 2 Web';
-	src: url('../pudding-fonts/national/National2Web-Bold.woff2') format('woff2'),
-	url('../pudding-fonts/national/National2Web-Bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-stretch: normal;
-	font-display: swap;
-} */
-
-/*
-********************
-	Source Sans Pro
-********************
-*/
-
-@font-face {
-  font-family: "Source Sans Pro";
-  src: url("../hai-fonts/national/SourceSansPro-Regular.ttf") format("ttf");
+  font-family: "Circular";
+  src: url("../pudding-fonts/circular/CircularStd-Medium.woff2") format("woff2"),
+    url("../pudding-fonts/national/CircularStd-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
@@ -51,14 +27,35 @@
 }
 
 @font-face {
-  font-family: "National 2 Web";
-  src: url("../pudding-fonts/national/National2Web-Bold.woff2") format("woff2"),
-    url("../pudding-fonts/national/National2Web-Bold.woff") format("woff");
+  font-family: "Circular";
+  src: url("../pudding-fonts/circular/CircularStd-Book.woff2") format("woff2"),
+    url("../pudding-fonts/national/CircularStd-Book.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Circular";
+  src: url("../pudding-fonts/circular/CircularStd-Black.woff2") format("woff2"),
+    url("../pudding-fonts/national/CircularStd-Black.woff") format("woff");
   font-weight: 700;
   font-style: normal;
   font-stretch: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Circular";
+  src: url("../pudding-fonts/circular/CircularStd-Bold.woff2") format("woff2"),
+    url("../pudding-fonts/national/CircularStd-Bold.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
 
 /*
 ********************
