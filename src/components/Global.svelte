@@ -21,29 +21,34 @@
 
 <style>
   .line {
-    width: 0.2%;
+    width: 1px;
+    margin-left: 20px;
+    margin-right: 20px;
     /* align-self: center; */
     /* margin: auto 0; */
     /* height: 90%; */
     background-color: var(--gray);
   }
   .intro {
-    width: 45%;
+    max-width: 400px;
   }
   .top-right {
-    width: 45%;
+    width: 1px;
+    flex-grow: 1;
   }
   .upper {
     display: flex;
     direction: column;
     justify-content: space-between;
-    width: 85%;
+    width: calc(100% - 25px);
+    max-width: 900px;
     margin-bottom: 2rem;
     height: 100%;
     margin: 0 auto;
   }
   .lower {
-    width: 90%;
+    width: calc(100% - 25px);
+    max-width: 900px;
     margin: 0 auto;
     margin-top: 2rem;
     display: flex;
