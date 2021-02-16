@@ -126,20 +126,22 @@
         </h3>
       </div>
     {/if}
-    <LayerCake
-      padding="{{ right: 10, bottom: 20, left: 25 }}"
-      x="{xKey}"
-      y="{yKey}"
-      yDomain="{[0, null]}"
-      data="{chart_values1}"
-    >
-      <Svg>
-        <AxisX />
-        <AxisY ticks="{4}" />
-        <Line />
-        <Area />
-      </Svg>
-    </LayerCake>
+    <div class="chart-inner">
+      <LayerCake
+        padding="{{ right: 10, bottom: 20, left: 25 }}"
+        x="{xKey}"
+        y="{yKey}"
+        yDomain="{[0, null]}"
+        data="{chart_values1}"
+      >
+        <Svg>
+          <AxisX />
+          <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+          <Line />
+          <Area />
+        </Svg>
+      </LayerCake>
+    </div>
   </div>
   <div class="chart-container">
     <div class="dropdown">
@@ -159,34 +161,44 @@
         </h3>
       </div>
     {/if}
-    <LayerCake
-      padding="{{ right: 10, bottom: 20, left: 25 }}"
-      x="{xKey}"
-      y="{yKey}"
-      yDomain="{[0, null]}"
-      data="{chart_values2}"
-    >
-      <Svg>
-        <AxisX />
-        <AxisY ticks="{4}" />
-        <Line />
-        <Area />
-      </Svg>
-    </LayerCake>
+    <div class="chart-inner">
+      <LayerCake
+        padding="{{ right: 10, bottom: 20, left: 25 }}"
+        x="{xKey}"
+        y="{yKey}"
+        yDomain="{[0, null]}"
+        data="{chart_values2}"
+      >
+        <Svg>
+          <AxisX gridlines="{false}" />
+          <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+          <Line />
+          <Area />
+        </Svg>
+      </LayerCake>
+    </div>
   </div>
 </div>
 
 <style>
   .chart-container {
-    width: 50%;
-    height: 50vh;
+    width: 45%;
+    height: 100%;
+  }
+
+  .chart-inner {
+    width: 100%;
+    height: 30vh;
+    padding: 1.25rem;
+    pointer-events: all;
   }
 
   .overall-container {
     display: flex;
     direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
+    height: 100%;
   }
 
   .annotation {

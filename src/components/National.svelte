@@ -77,6 +77,7 @@
 
   .mid {
     width: 90%;
+    height: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
     display: flex;
@@ -89,5 +90,6 @@
     /* display: flex;
     align-items: center; */
     margin-bottom: 6rem;
+    height: 100%;
   }
 </style>

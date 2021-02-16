@@ -10,9 +10,7 @@
   let table_values;
   let filtered;
   let temp;
-  let temp_value;
   let mounted = false;
-  let country_values = [];
 
   let updateTableValues = () => {
     filtered = $data.filter((d) => {
@@ -20,7 +18,6 @@
     });
     filtered = filtered;
     table_values = [];
-    country_values = [];
     filtered.forEach((d) => {
       temp = {};
       temp["country_name"] = d.CountryName;
@@ -49,14 +46,14 @@
     mounted = true;
   });
 
-  $: methodology_year, updateTableValues();
+  $: $methodology_year, updateTableValues();
   //   $: variable_names, updateTableValues();
 </script>
 
 {#if mounted}
   <div class="overall-container">
     <div class="upper">
-      <h1 class="section-header">Data Glossary and Methodology</h1>
+      <h1 class="section-header">Data Dictionary and Methodology</h1>
       <h2>Data Dictionary</h2>
       {#each $variables as v}
         <ul>
@@ -70,8 +67,11 @@
         </ul>
       {/each}
     </div>
-    <div class="table">
+    <div class="title-container">
+      <h2>Export Data</h2>
       <YearSlider methodology="true" />
+    </div>
+    <div class="table">
       <Table
         data="{table_values}"
         keys="{Object.keys(table_values[0])}"
@@ -93,13 +93,16 @@
     margin: 0 auto;
   }
 
+  .title-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   .table {
     width: 100%;
     margin: 0 auto;
   }
 
   .section-header {
-    text-align: center;
-    margin: 0 auto;
   }
 </style>

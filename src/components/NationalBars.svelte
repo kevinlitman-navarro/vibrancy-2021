@@ -6,7 +6,11 @@
   import Tooltip from "./Tooltip.svelte";
   import YearSlider from "./YearSlider.svelte";
   import Bars from "./Bars.svelte";
-  import { data } from "../stores/vibrancy.js";
+  import {
+    data,
+    temporal_metric_1,
+    temporal_metric_2,
+  } from "../stores/vibrancy.js";
   import {
     national_year,
     country,
@@ -54,6 +58,7 @@
         ) {
           temp_variable = {};
           temp_variable["variable_name"] = v.shortname_scaled;
+          temp_variable["variable_name_raw"] = v.shortname_raw;
           temp_variable["pillar"] = v.pillar_1;
           temp_variable["display_name"] = v.metric_name;
           variable_names.push(temp_variable);
@@ -75,7 +80,10 @@
       chart_values.push(temp);
     });
     chart_values.sort((a, b) => ascending(a.value, b.value));
+    console.log(chart_values);
     $ranked_metric = chart_values.slice(-1)[0].variable;
+    // $temporal_metric_1 = chart_values.slice(-1)[0].variable;
+    // $temporal_metric_2 = chart_values[0].variable;
   };
 
   let updateRankChart = () => {
@@ -167,6 +175,8 @@
               {/if}
               <Annotation
                 content="Click a bar to see where a country ranks on that variable"
+                top="200"
+                left="600"
               />
             </Html>
             <Svg>
@@ -186,10 +196,10 @@
     </div>
     <div class="chart-container rank-container shadow border-left-primary">
       <div class="chart-inner">
-        <h3>
+        <h2>
           {codebook.find((d) => d.shortname_scaled == $ranked_metric)
             .metric_name}, {$national_year}
-        </h3>
+        </h2>
         <span
           >Rank: {text_sorted.indexOf(
             text_sorted.find((d) => {
@@ -197,34 +207,36 @@
             })
           ) + 1} of {text_sorted.length}</span
         >
-        <LayerCake
-          x="value"
-          y="country_name"
-          yScale="{scaleBand().paddingInner([0.05]).round(true)}"
-          xDomain="{[0, null]}"
-          yDomain="{ranked_values.map((d) => d.country_name)}"
-          data="{ranked_values}"
-          padding="{{ top: 0, right: 0, bottom: 0, left: 0 }}"
-        >
-          <Html pointerEvents="{false}">
-            {#if type == "rank"}
-              <Tooltip
-                type="rank"
-                x="{current_x}"
-                y="{current_y}"
-                show_tooltip="{show}"
-              />
-            {/if}
-          </Html>
-          <!-- <Svg>
+        <div class="layercake">
+          <LayerCake
+            x="value"
+            y="country_name"
+            yScale="{scaleBand().paddingInner([0.05]).round(true)}"
+            xDomain="{[0, null]}"
+            yDomain="{ranked_values.map((d) => d.country_name)}"
+            data="{ranked_values}"
+            padding="{{ top: 0, right: 0, bottom: 20, left: 0 }}"
+          >
+            <Html pointerEvents="{false}">
+              {#if type == "rank"}
+                <Tooltip
+                  type="rank"
+                  x="{current_x}"
+                  y="{current_y}"
+                  show_tooltip="{show}"
+                />
+              {/if}
+            </Html>
+            <!-- <Svg>
           <AxisX />
           <AxisY />
         </Svg> -->
 
-          <Svg>
-            <Bars ranked="{true}" on:message="{updateTooltip}" />
-          </Svg>
-        </LayerCake>
+            <Svg>
+              <Bars ranked="{true}" on:message="{updateTooltip}" />
+            </Svg>
+          </LayerCake>
+        </div>
       </div>
     </div>
   </div>
@@ -235,7 +247,7 @@
     display: flex;
     direction: column;
     justify-content: center;
-    height: 70vh;
+    height: 100%;
   }
 
   .upper {
@@ -246,7 +258,7 @@
     align-items: baseline;
   }
   .metric-container {
-    width: 70%;
+    width: 65%;
     height: 100%;
   }
 
@@ -264,8 +276,8 @@
     background-clip: border-box;
     border: 1px solid #e3e6f0;
     border-radius: 0.35rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    /* overflow-x: hidden; */
     pointer-events: all;
   }
 
@@ -278,11 +290,12 @@
 
   .layercake {
     width: 100%;
-    height: 100%;
+    height: 70vh;
   }
   .rank-container {
-    width: 30%;
+    width: 35%;
     height: 100%;
+    line-height: 1.4em;
   }
 
   .shadow {

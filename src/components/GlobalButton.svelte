@@ -1,8 +1,10 @@
 <script>
   export let command;
   import { variables } from "../stores/vibrancy.js";
+  let clicked = false;
 
   let runCommand = (command) => {
+    clicked = true;
     if (command == "All weights to midpoint") {
       $variables.forEach((x) => {
         x.multiplier = 0.5;
@@ -37,10 +39,26 @@
   };
 </script>
 
-<input class="button" value="{command}" on:click="{runCommand(command)}" />
+<div on:click="{runCommand(command)}" class="button-container">
+  <input class="button" value="{command}" />
+</div>
 
 <style>
   input {
+    pointer-events: none;
+    background: var(--white);
     cursor: pointer;
+  }
+
+  input:hover {
+  }
+
+  .button-container {
+    cursor: pointer;
+  }
+
+  .button-container:hover {
+    background: #ececf1;
+    pointer-events: all;
   }
 </style>

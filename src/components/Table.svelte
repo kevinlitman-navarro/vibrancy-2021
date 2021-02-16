@@ -2,9 +2,11 @@
   export let data;
   export let keys;
   export let mounted;
+  import { methodology_year } from "../stores/vibrancy.js";
   console.log(keys);
   let export_data;
   $: mounted, console.log(keys);
+  let file;
 
   function download_csv(csv, filename) {
     console.log(csv);
@@ -52,7 +54,8 @@
   let exportTable = () => {
     console.log("clicked");
     var html = document.querySelector("table").outerHTML;
-    export_table_to_csv(export_data, "table.csv");
+    file = $methodology_year.toString().concat("_data.csv");
+    export_table_to_csv(export_data, file);
   };
 </script>
 

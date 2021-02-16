@@ -115,27 +115,23 @@
           d["society_average_weighted"] = d.society_average * v.multiplier;
         }
       });
-      d.total_sum = sum([
-        d.society_average_weighted,
-        d.economy_average_weighted,
-        d.research_average_weighted,
-      ]);
+
+      d.pillars_used = 0;
+      if (d.society_average_weighted) {
+        d.pillars_used = d.pillars_used + 1;
+      }
+      if (d.economy_average_weighted) {
+        d.pillars_used = d.pillars_used + 1;
+      }
+      if (d.research_average_weighted) {
+        d.pillars_used = d.pillars_used + 1;
+      }
+
       d.total_average = mean([
         d.society_average_weighted,
         d.economy_average_weighted,
         d.research_average_weighted,
       ]);
-
-      d.pillars_used = 0;
-      if (d.society_average_weighted) {
-        d.pillars_used += +1;
-      }
-      if (d.economy_average_weighted) {
-        d.pillars_used += +1;
-      }
-      if (d.research_average_weighted) {
-        d.pillars_used += +1;
-      }
 
       country_cut.forEach((d) => {
         for (let x of [
@@ -149,9 +145,21 @@
         }
       });
 
+      d.total_average =
+        sum([
+          d.society_average_weighted,
+          d.economy_average_weighted,
+          d.research_average_weighted,
+        ]) / d.pillars_used;
+
       d.society_share = d.society_average_weighted / d.pillars_used;
       d.economy_share = d.economy_average_weighted / d.pillars_used;
       d.research_share = d.research_average_weighted / d.pillars_used;
+
+      d.total_sum =
+        d.research_average_weighted +
+        d.economy_average_weighted +
+        d.society_average_weighted;
 
       country_cut.forEach((d) => {
         for (let x of ["society_share", "economy_share", "research_share"]) {
@@ -168,10 +176,18 @@
         0
       );
     });
+    usable_country_cut.forEach((d) => {
+      if (!d.total_average) {
+        d.total_average = 0;
+      }
+    });
+    usable_country_cut = usable_country_cut.filter((d) => {
+      return d.total_average > 0;
+    });
     usable_country_cut.sort((a, b) =>
       ascending(a.total_average, b.total_average)
     );
-
+    console.log(usable_country_cut);
     country_names = Array.from(usable_country_cut.map((d) => d.country_name));
 
     stackData = stack().keys(seriesNames);
@@ -241,7 +257,11 @@
           <AxisY textAnchor="end" spacing="136" text_size="" />
         </Svg>
         <Html>
-          <Annotation content="Click a bar to visit that country's profile" />
+          <Annotation
+            content="Click a bar to visit that country's profile"
+            top="200"
+            left="600"
+          />
           <!-- <Tooltip
             type="global"
             x="{current_x}"
