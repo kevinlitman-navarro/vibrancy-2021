@@ -20,7 +20,7 @@
 </script>
 
 {#if variable != "Research and Development" && variable != "Economy" && variable != "Society"}
-  <span>{variable}</span>
+  <span class="slider-name">{variable}</span>
 {/if}
 
 {#if variable == "Research and Development"}
@@ -58,16 +58,25 @@
 <style>
   .annotation {
     position: absolute;
-    display: inline-block;
+    font-size: .8rem;
+    top: 5px;
+  }
+
+  .slider-name {
+    width:150px;
+    margin-right:1rem;
+    font-size:.8rem;
   }
 
   .low {
     text-align: right;
-    transform: translate(-1em, 1em);
+    left:0;
+    transform: translate(calc(-50%), 100%);
   }
 
   .high {
     text-align: left;
-    transform: translate(4em, 1em);
+    right:0;
+    transform: translate(calc(50% - 10px),100%);
   }
 </style>

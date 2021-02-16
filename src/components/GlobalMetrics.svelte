@@ -12,15 +12,9 @@
     </p>
   </div>
   <div class="buttons">
-    <div>
-      <GlobalButton command="All weights to midpoint" />
-    </div>
-    <div>
-      <GlobalButton command="Only per capita metrics" />
-    </div>
-    <div>
-      <GlobalButton command="Only absolute metrics" />
-    </div>
+    <GlobalButton command="All weights to midpoint" />
+    <GlobalButton command="Only per capita metrics" />
+    <GlobalButton command="Only absolute metrics" />
   </div>
 </div>
 <div class="lower">
@@ -30,9 +24,13 @@
 <style>
   .buttons {
     display: flex;
-    direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
+
+  .lower {
+    margin-top:2rem;
+  }
+
   div.buttons > * {
     cursor: pointer;
   }
