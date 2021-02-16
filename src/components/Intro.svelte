@@ -31,7 +31,7 @@
 
 <style>
   h1 {
-    font-family: "Circular Std";
+    font-family: Circular;
     color: var(--dark-blue);
     font-weight: 700;
   }
