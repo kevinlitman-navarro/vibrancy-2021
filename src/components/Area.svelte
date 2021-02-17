@@ -1,9 +1,14 @@
 <script>
   import { getContext } from "svelte";
+  import { scaleOrdinal } from "d3-scale";
 
   const { data, xGet, yGet, xScale, yScale, extents } = getContext("LayerCake");
 
   export let fill = "#ab00d610";
+
+  const seriesNames = ["Research and Development", "Economy", "Society"];
+  const seriesColors = ["#75ceee", "#78cabc", "#d5a4cb"];
+  const scale = scaleOrdinal().domain(seriesNames).range(seriesColors);
 
   $: path =
     "M" +
@@ -31,4 +36,6 @@
   }
 </script>
 
-<path class="path-area" d="{area}" fill="{fill}"></path>
+<!-- <path class="path-area" d="{area}" opacity=".4"></path> -->
+<path class="path-area" d="{area}" opacity=".4" fill="{scale($data[0].pillar)}"
+></path>

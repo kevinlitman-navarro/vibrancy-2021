@@ -8,12 +8,14 @@
     temporal_metric_1,
     temporal_metric_2,
     ranked_metric,
+    tooltip_text,
   } from "../stores/vibrancy.js";
   import codebook from "../data/demo/codebook.csv";
-
+  import Tooltip from "./Tooltip.svelte";
   import Line from "./Line.svelte";
   import Area from "./Area.svelte";
   import AxisX from "./AxisX.svelte";
+  import Icon from "./helpers/Icon.svelte";
   import AxisY from "./AxisY.svelte";
   import Dropdown from "./Dropdown.svelte";
   let chart_values1;
@@ -27,15 +29,21 @@
   let variable_names;
   let display_names;
   let mounted = false;
+  let show1 = false;
+  let show2 = false;
 
   let updateLines1 = () => {
     chart_values1 = [];
+    console.log($temporal_metric_1);
     country_cut = $data.filter((d) => {
       return d.CountryName == $country;
     });
     country_cut.forEach((d) => {
       temp = {};
       temp["variable"] = $temporal_metric_1;
+      temp["pillar"] = codebook.find((d) => {
+        return d.shortname_raw == $temporal_metric_1;
+      }).pillar_1;
       temp["country_name"] = d.CountryName;
       temp["value"] = d[$temporal_metric_1];
       temp["year"] = d.PublishYear;
@@ -49,6 +57,7 @@
 
   let updateLines2 = () => {
     chart_values2 = [];
+    console.log($temporal_metric_2);
     country_cut = $data.filter((d) => {
       return d.CountryName == $country;
     });
@@ -57,6 +66,9 @@
       temp = {};
       temp["variable"] = $temporal_metric_2;
       temp["country_name"] = d.CountryName;
+      temp["pillar"] = codebook.find((d) => {
+        return d.shortname_raw == $temporal_metric_2;
+      }).pillar_1;
       temp["value"] = d[$temporal_metric_2];
       temp["year"] = d.PublishYear;
       if (temp.year && temp.value && temp.value != "-") {
@@ -77,7 +89,9 @@
       d.metadata.forEach((v) => {
         if (
           country_cut.slice(-1)[0][v.shortname_raw] &&
-          country_cut.slice(-1)[0][v.shortname_raw]
+          country_cut.slice(-2)[0][v.shortname_raw] &&
+          country_cut.slice(-1)[0][v.shortname_raw] != "-" &&
+          country_cut.slice(-2)[0][v.shortname_raw] != "-"
         ) {
           variable_names.push(v.shortname_raw);
         }
@@ -88,97 +102,167 @@
         codebook.find((x) => x.shortname_raw == d).metric_name
       );
     });
+    console.log(variable_names);
+    $temporal_metric_1 = variable_names[0];
+    $temporal_metric_2 = variable_names[1];
     console.log(display_names);
+    console.log($temporal_metric_1);
   };
+
+  function handleMouseout() {
+    show1 = false;
+    show2 = false;
+  }
+
+  function handleMouseover1(d) {
+    show1 = true;
+    // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
+    $tooltip_text = d;
+    console.log(d);
+  }
+
+  function handleMouseover2(d) {
+    show2 = true;
+    // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
+    $tooltip_text = d;
+    console.log(d);
+  }
 
   onMount(() => {
     getVariableNames();
     $temporal_metric_1 = variable_names[0];
     $temporal_metric_2 = variable_names[1];
+
     console.log($data);
-    updateLines1();
-    updateLines2();
 
     mounted = true;
   });
 
-  $: $temporal_metric_1, updateLines1();
-  $: $temporal_metric_2, updateLines2();
+  $: if ($temporal_metric_1) {
+    $temporal_metric_1, updateLines1();
+  }
+  $: if ($temporal_metric_2) {
+    $temporal_metric_2, updateLines2();
+  }
+  $: if (mounted) {
+    updateLines1();
+    updateLines2();
+  }
   $: $country, getVariableNames();
 </script>
 
-<div class="overall-container">
-  <div class="chart-container">
-    <div class="dropdown">
-      <p class="annotation">SELECT A METRIC</p>
-      <Dropdown
-        items="{variable_names}"
-        metric1="true"
-        placeholder="{variable_names[0]}"
-      />
-    </div>
-    {#if $temporal_metric_1}
-      <div class="title-container">
-        <h3>
-          {codebook.find((d) => d.shortname_raw == $temporal_metric_1)
-            .metric_name} in {$country}, {chart_values1[0]
-            .year}-{chart_values1.slice(-1)[0].year}
-        </h3>
+{#if mounted}
+  <div class="overall-container">
+    <div class="chart-container">
+      <div class="dropdown">
+        <p class="annotation">SELECT A METRIC</p>
+        <Dropdown
+          items="{variable_names}"
+          metric1="true"
+          placeholder="{variable_names[0]}"
+        />
       </div>
-    {/if}
-    <div class="chart-inner">
-      <LayerCake
-        padding="{{ right: 10, bottom: 20, left: 25 }}"
-        x="{xKey}"
-        y="{yKey}"
-        yDomain="{[0, null]}"
-        data="{chart_values1}"
-      >
-        <Svg>
-          <AxisX />
-          <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
-          <Line />
-          <Area />
-        </Svg>
-      </LayerCake>
+      {#if $temporal_metric_1}
+        <div class="title-container">
+          <Tooltip
+            x="{84}"
+            y="{182}"
+            width="300px"
+            unit="%"
+            show_tooltip="{show1}"
+          />
+          <h3>
+            {codebook.find((d) => d.shortname_raw == $temporal_metric_1)
+              .metric_name}<span
+              on:mouseout="{handleMouseout}"
+              on:mouseenter="{handleMouseover1(
+                codebook.find((d) => d.shortname_raw == $temporal_metric_1)
+                  .Definition
+              )}"
+              ><Icon
+                pointer-events="{true}"
+                name="info"
+                strokeWidth="2"
+              /></span
+            >
+            in {$country}, {chart_values1[0].year}-{chart_values1.slice(-1)[0]
+              .year}
+          </h3>
+        </div>
+      {/if}
+      <div class="chart-inner">
+        <LayerCake
+          padding="{{ right: 10, bottom: 20, left: 25 }}"
+          x="{xKey}"
+          y="{yKey}"
+          yDomain="{[0, null]}"
+          data="{chart_values1}"
+        >
+          <Svg>
+            <AxisX />
+            <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+            <Line />
+            <Area />
+          </Svg>
+        </LayerCake>
+      </div>
+    </div>
+    <div class="chart-container">
+      <div class="dropdown">
+        <p class="annotation">SELECT A METRIC</p>
+        <Dropdown
+          items="{variable_names}"
+          metric2="true"
+          placeholder="{variable_names.slice(-1)[0]}"
+        />
+      </div>
+      {#if $temporal_metric_2}
+        <div class="title-container">
+          <Tooltip
+            x="{134}"
+            y="{182}"
+            width="300px"
+            unit="%"
+            show_tooltip="{show2}"
+          />
+          <h3>
+            {codebook.find((d) => d.shortname_raw == $temporal_metric_2)
+              .metric_name}<span
+              on:mouseout="{handleMouseout}"
+              on:mouseenter="{handleMouseover2(
+                codebook.find((d) => d.shortname_raw == $temporal_metric_2)
+                  .Definition
+              )}"
+              ><Icon
+                pointer-events="{true}"
+                name="info"
+                strokeWidth="2"
+              /></span
+            >
+            in {$country}, {chart_values2[0].year}-{chart_values2.slice(-1)[0]
+              .year}
+          </h3>
+        </div>
+      {/if}
+      <div class="chart-inner">
+        <LayerCake
+          padding="{{ right: 10, bottom: 20, left: 25 }}"
+          x="{xKey}"
+          y="{yKey}"
+          yDomain="{[0, null]}"
+          data="{chart_values2}"
+        >
+          <Svg>
+            <AxisX gridlines="{false}" />
+            <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+            <Line />
+            <Area />
+          </Svg>
+        </LayerCake>
+      </div>
     </div>
   </div>
-  <div class="chart-container">
-    <div class="dropdown">
-      <p class="annotation">SELECT A METRIC</p>
-      <Dropdown
-        items="{variable_names}"
-        metric2="true"
-        placeholder="{variable_names.slice(-1)[0]}"
-      />
-    </div>
-    {#if $temporal_metric_2}
-      <div class="title-container">
-        <h3>
-          {codebook.find((d) => d.shortname_raw == $temporal_metric_2)
-            .metric_name} in {$country}, {chart_values2[0]
-            .year}-{chart_values2.slice(-1)[0].year}
-        </h3>
-      </div>
-    {/if}
-    <div class="chart-inner">
-      <LayerCake
-        padding="{{ right: 10, bottom: 20, left: 25 }}"
-        x="{xKey}"
-        y="{yKey}"
-        yDomain="{[0, null]}"
-        data="{chart_values2}"
-      >
-        <Svg>
-          <AxisX gridlines="{false}" />
-          <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
-          <Line />
-          <Area />
-        </Svg>
-      </LayerCake>
-    </div>
-  </div>
-</div>
+{/if}
 
 <style>
   .chart-container {
@@ -188,7 +272,7 @@
 
   .chart-inner {
     width: 100%;
-    height: 30vh;
+    height: 35vh;
     padding: 1.25rem;
     pointer-events: all;
   }
@@ -199,6 +283,10 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
+  }
+
+  h3 > * {
+    pointer-events: all;
   }
 
   .annotation {

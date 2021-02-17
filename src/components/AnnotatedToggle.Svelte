@@ -4,13 +4,15 @@
   export let value = null;
 </script>
 
-<div class="eyebrow">SELECT A VIEW</div>
 <div class="toggle-container">
   <div class="annotation left">
     <p>Compare countries across 26 metrics</p>
   </div>
-  <div class="toggle">
-    <Toggle options="{options}" value="{value}" />
+  <div class="toggle-box">
+    <div class="eyebrow">SELECT A VIEW</div>
+    <div class="toggle">
+      <Toggle options="{options}" value="{value}" />
+    </div>
   </div>
   <div class="annotation right">
     <p>Select a country to see detailed metrics</p>
@@ -24,12 +26,15 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .eyebrow {
     text-align: center;
     margin: 0 auto;
     font-weight: 700;
+    margin-bottom: 0;
   }
 
   .toggle {
@@ -37,7 +42,7 @@
   }
 
   .annotation {
-    max-width: 25%;
+    max-width: 40%;
   }
 
   .left {

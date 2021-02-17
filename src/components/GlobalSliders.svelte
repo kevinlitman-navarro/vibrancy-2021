@@ -27,13 +27,27 @@
     });
     $variables = $variables;
   };
+  let research_fix = {
+    "Research and Development": "Research",
+  };
+  let isInt = (n) => {
+    return parseInt(n) === n;
+  };
 </script>
 
 <div class="overall">
   {#if $variables}
     {#each $variables as d}
       <div class="container">
-        <p style="color:{scale(d.metric_name)};" class="title">{d.metric_name}</p>
+        {#if d.metric_name == "Research and Development"}
+          <p style="color:{scale(d.metric_name)};" class="title">
+            {research_fix[d.metric_name]}
+          </p>
+        {:else}
+          <p style="color:{scale(d.metric_name)};" class="title">
+            {d.metric_name}
+          </p>
+        {/if}
         <div class="slider">
           <Slider
             variable="{d.metric_name}"
@@ -43,42 +57,70 @@
           />
         </div>
 
-        <Collapse headerText="{d.metric_name}" color="{scale(d.metric_name)}">
+        <Collapse
+          headerText="See individual metrics"
+          color="{scale(d.metric_name)}"
+        >
+          <div
+            class="collapsed-sliders"
+            headerText="{d.metric_name}"
+            color="{scale(d.metric_name)}"
+          >
+            <div class="column">
+              {#each d.metadata as v, i}
+                {#if isInt(i / 2)}
+                  <div class="slider-container">
+                    <div class="slider pillar">
+                      <Slider
+                        variable="{v.metric_name}"
+                        name="{v.metric_name}"
+                        id="{v.id}"
+                        multiplier="{v.multiplier}"
+                        on:message="{updateVariable}"
+                      />
+                    </div>
+                  </div>
+                {/if}
+              {/each}
+            </div>
 
-          <div class="collapsed-sliders" headerText="{d.metric_name}" color="{scale(d.metric_name)}">
-
-            {#each d.metadata as v}
-              <div class="slider-container">
-                <div class="slider pillar">
-                  <Slider
-                    variable="{v.metric_name}"
-                    name="{v.metric_name}"
-                    id="{v.id}"
-                    multiplier="{v.multiplier}"
-                    on:message="{updateVariable}"
-                  />
-                </div>
-              </div>
-            {/each}
-
+            <div class="column">
+              {#each d.metadata as v, i}
+                {#if !isInt(i / 2)}
+                  <div class="slider-container">
+                    <div class="slider pillar">
+                      <Slider
+                        variable="{v.metric_name}"
+                        name="{v.metric_name}"
+                        id="{v.id}"
+                        multiplier="{v.multiplier}"
+                        on:message="{updateVariable}"
+                      />
+                    </div>
+                  </div>
+                {/if}
+              {/each}
+            </div>
           </div>
-
         </Collapse>
-
-
       </div>
     {/each}
   {/if}
 </div>
 
 <style>
-
   .collapsed-sliders {
-    width:100%;
-    margin-top:1rem;
-    overflow-y:scroll;
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+
+    overflow-y: scroll;
     max-height: 300px;
-    padding:1rem;
+    padding: 1rem;
+  }
+
+  .column {
+    flex: 50%;
   }
 
   .overall {
@@ -87,33 +129,29 @@
   .container {
     display: flex;
     margin: 0;
-    flex-wrap:wrap;
-    margin-bottom:1rem;
-
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
   .title {
-    max-width:150px;
-    margin:0;
-    width:120px;
-    font-size:1.3rem;
-    margin-right:1rem;
+    max-width: 150px;
+    margin: 0;
+    width: 120px;
+    font-size: 1.3rem;
+    margin-right: 1rem;
     line-height: 1.2;
   }
 
   .slider {
     position: relative;
-    align-self:center;
+    align-self: center;
   }
 
   .pillar {
     position: relative;
-    display:flex;
-    margin-bottom:1rem;
+    display: flex;
+    margin-bottom: 1rem;
   }
 
   .pillar {
-
   }
-
-
 </style>

@@ -3,56 +3,68 @@
 
   // based on suggestions from:
   // Inclusive Components by Heydon Pickering https://inclusive-components.design/collapsible-sections/
-  export let headerText;
+  export let headerText = "See individual metrics";
   export let color;
+  export let type;
   let expanded = false;
   let fill = "#666666";
 </script>
 
+<div class="collapse">
+  <div class="clickable" on:click="{() => (expanded = !expanded)}">
+    {#if type == "header"}
+      <h1 class="header">{headerText}</h1>
+    {:else}
+      <span class="see-more">{headerText}</span>
+    {/if}
 
-
-
-<div class="collapse" on:click="{() => (expanded = !expanded)}">
-  <span class="see-more">See more</span>
-
-  <button class="carrot" aria-expanded="{expanded}">
-    <div class="icon-container" focusable="false">
-      <div class="closed">
-        <Icon name="chevron-down" stroke="{fill}" />
+    <button class="carrot" aria-expanded="{expanded}">
+      <div class="icon-container" focusable="false">
+        <div class="closed">
+          <Icon
+            name="chevron-down"
+            stroke="{fill}"
+            strokeWidth="{type == 'header' ? 3 : 3}"
+          />
+        </div>
+        <div class="open">
+          <Icon name="chevron-left" stroke="{fill}" />
+        </div>
       </div>
-      <div class="open">
-        <Icon name="chevron-left" stroke="{fill}" />
-      </div>
-    </div>
-  </button>
+    </button>
+  </div>
 
   <div class="contents" hidden="{!expanded}">
     <slot />
   </div>
-
 </div>
-
-
 
 <style>
   button {
     all: inherit;
+    pointer-events: auto;
+    display: inline;
+    max-width: fit-content;
+  }
+
+  .header {
+    margin: 0 auto;
   }
 
   .collapse {
-    width:100%;
-    display:flex;
-    cursor:pointer;
-    flex-wrap:wrap;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+
+    flex-wrap: wrap;
   }
   .carrot {
     width: 5px;
   }
 
-
-  .see-more{
-    margin:0;
-    margin-right:.5rem;
+  .see-more {
+    margin: 0;
+    margin-right: 0.5rem;
   }
 
   .open {
@@ -74,6 +86,11 @@
     align-items: center;
   }
 
+  .icon-container,
+  .contents {
+    pointer-events: auto;
+  }
+
   button[aria-expanded="true"] .closed {
     display: none;
   }
@@ -93,6 +110,4 @@
   .slider-container {
     position: relative;
   }
-
-
 </style>

@@ -38,10 +38,14 @@
 
 <style>
   .intro {
-    width: 45%;
+    max-width: 550px;
+    width: 50%;
   }
   .top-right {
-    width: 45%;
+    max-width: 500px;
+    width: 50%;
+    align-self: center;
+    justify-self: center;
   }
 
   .line0 {
@@ -55,7 +59,8 @@
     display: flex;
     direction: column;
     justify-content: space-between;
-    width: 85%;
+    width: calc(100% - 25px);
+    max-width: 1100px;
     height: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
@@ -67,8 +72,8 @@
 
   .line {
     height: 0.1rem;
-    width: 100%;
-    margin: 2rem 0 2rem 0;
+    width: 80%;
+    margin: 2rem auto 2rem auto;
     /* align-self: center; */
     /* margin: auto 0; */
     /* height: 90%; */

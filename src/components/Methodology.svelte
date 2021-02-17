@@ -52,32 +52,34 @@
 
 {#if mounted}
   <div class="overall-container">
-    <div class="upper">
-      <h1 class="section-header">Data Dictionary and Methodology</h1>
-      <h2>Data Dictionary</h2>
-      {#each $variables as v}
-        <ul>
-          <li>
-            <Collapse headerText="{v.metric_name}">
-              {#each v.metadata as d}
-                <li>{d.metric_name}: {d.Definition}</li>
-              {/each}
-            </Collapse>
-          </li>
-        </ul>
-      {/each}
-    </div>
-    <div class="title-container">
-      <h2>Export Data</h2>
-      <YearSlider methodology="true" />
-    </div>
-    <div class="table">
-      <Table
-        data="{table_values}"
-        keys="{Object.keys(table_values[0])}"
-        mounted="{mounted}"
-      />
-    </div>
+    <Collapse headerText="Methodology and Data Dictionary" type="header">
+      <div class="upper">
+        <h1 class="section-header">Methodology and Data Dictionary</h1>
+        <h2>Data Dictionary</h2>
+        {#each $variables as v}
+          <ul>
+            <li>
+              <Collapse headerText="{v.metric_name}">
+                {#each v.metadata as d}
+                  <li>{d.metric_name}: {d.Definition}</li>
+                {/each}
+              </Collapse>
+            </li>
+          </ul>
+        {/each}
+      </div>
+      <div class="title-container">
+        <h2>Export Data</h2>
+        <YearSlider methodology="true" />
+      </div>
+      <div class="table">
+        <Table
+          data="{table_values}"
+          keys="{Object.keys(table_values[0])}"
+          mounted="{mounted}"
+        />
+      </div>
+    </Collapse>
   </div>
 {/if}
 
@@ -86,6 +88,8 @@
     width: 90%;
     margin: 0 auto;
     pointer-events: all;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
   }
 
   .upper {

@@ -59,7 +59,7 @@
   function handleMouseoverNational(d) {
     show = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
-    $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value));
+    $tooltip_text = $y(d).concat(": ").concat(Math.round(d.value));
     current_x = columnWidth(d);
     current_y = $yGet(d) - $yScale.bandwidth() * 2;
     type = "national";

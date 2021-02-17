@@ -205,7 +205,7 @@
             text_sorted.find((d) => {
               return d.country_name == $country;
             })
-          ) + 1} of {text_sorted.length}</span
+          ) + 1} of {text_sorted.length} TK</span
         >
         <div class="layercake">
           <LayerCake

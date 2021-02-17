@@ -55,28 +55,29 @@
   <option value="1"></option>
 </datalist>
 
+<!-- <p>{multiplier}</p> -->
 <style>
   .annotation {
     position: absolute;
-    font-size: .8rem;
+    font-size: 0.8rem;
     top: 5px;
   }
 
   .slider-name {
-    width:150px;
-    margin-right:1rem;
-    font-size:.8rem;
+    width: 150px;
+    margin-right: 0rem;
+    font-size: 0.8rem;
   }
 
   .low {
     text-align: right;
-    left:0;
-    transform: translate(calc(-50%), 100%);
+    left: 0;
+    transform: translate(calc(-50%), -120%);
   }
 
   .high {
     text-align: left;
-    right:0;
-    transform: translate(calc(50% - 10px),100%);
+    right: 0;
+    transform: translate(calc(50% - 10px), -120%);
   }
 </style>
