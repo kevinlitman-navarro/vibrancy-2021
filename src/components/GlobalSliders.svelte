@@ -91,7 +91,9 @@
             color="{scale(d.metric_name)}"
             style="overflow-y:{d.metric_name == 'Inclusion'
               ? 'visible'
-              : 'scroll'}"
+              : 'scroll'};height:{d.metric_name == 'Economy'
+              ? '100px'
+              : '100%'}"
           >
             <div class="column one">
               {#each d.metadata as v, i}
@@ -142,7 +144,7 @@
     display: flex;
     overflow-x: visible;
     overflow-y: scroll;
-    min-height: 140px;
+
     height: 100%;
     max-height: 160px;
     padding-top: 0.2rem;
