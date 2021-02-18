@@ -6,14 +6,33 @@
   export let headerText = "See individual metrics";
   export let color;
   export let type;
+  export let name;
+  export let research_clicked = false;
+  export let economy_clicked = false;
+  export let inclusion_clicked = false;
   let expanded = false;
   let fill = "#666666";
+
+  let check = () => {
+    if (name == "Research & Development") {
+      expanded = research_clicked;
+    } else if (name == "Economy") {
+      expanded = economy_clicked;
+    } else if (name == "Inclusion") {
+      expanded = inclusion_clicked;
+    }
+    expanded = expanded;
+  };
+
+  $: research_clicked, economy_clicked, inclusion_clicked, check();
 </script>
 
 <div class="collapse">
   <div class="clickable" on:click="{() => (expanded = !expanded)}">
     {#if type == "header"}
       <h1 class="header">{headerText}</h1>
+    {:else if type == "header-small"}
+      <h3 class="header">{headerText}</h3>
     {:else}
       <span class="see-more">{headerText}</span>
     {/if}
@@ -40,6 +59,9 @@
 </div>
 
 <style>
+  .clickable {
+    display: flex;
+  }
   button {
     all: inherit;
     pointer-events: auto;

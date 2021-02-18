@@ -19,8 +19,14 @@
   $: update(multiplier);
 </script>
 
-{#if variable != "Research and Development" && variable != "Economy" && variable != "Society"}
-  <span class="slider-name">{variable}</span>
+{#if variable != "Research and Development" && variable != "Economy" && variable != "Inclusion"}
+  <span class="slider-name"
+    >{variable
+      .replace("Number of ", "")
+      .replace("*", "")
+      .replace(" Per Capita", " PC")
+      .replace(" (Job Titles)", "")}</span
+  >
 {/if}
 
 {#if variable == "Research and Development"}
@@ -64,8 +70,10 @@
   }
 
   .slider-name {
-    width: 150px;
-    margin-right: 0rem;
+    width: 100%;
+    text-align: right;
+    max-width: 150px;
+    margin-right: 0.2rem;
     font-size: 0.8rem;
   }
 
@@ -73,6 +81,10 @@
     text-align: right;
     left: 0;
     transform: translate(calc(-50%), -120%);
+  }
+  input {
+    margin-left: 0.2rem;
+    padding-left: 0;
   }
 
   .high {

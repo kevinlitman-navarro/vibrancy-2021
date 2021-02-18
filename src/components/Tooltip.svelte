@@ -3,16 +3,20 @@
   export let x;
   export let y;
   export let show_tooltip;
+  export let text_align = "center";
   export let unit = "px";
   export let width = 120;
+  export let max_width = "240px";
+  export let position = "absolute";
 </script>
 
 <div
-  style="top:{y}{unit};left:{x - 60}{unit};width:{width}"
+  style="top:{y}{unit};left:{x -
+    60}{unit};width:{width};max-width:{max_width};position:{position};text-align:{text_align}"
   class="tooltip"
   class:visible="{show_tooltip}"
 >
-  {$tooltip_text}
+  {@html $tooltip_text}
 </div>
 
 <style>

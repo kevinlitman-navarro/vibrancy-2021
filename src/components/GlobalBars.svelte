@@ -27,7 +27,7 @@
   let updated_key;
   let get_averages = [];
 
-  const seriesNames = ["research_share", "economy_share", "society_share"];
+  const seriesNames = ["research_share", "economy_share", "inclusion_share"];
 
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
   let stackData;
@@ -45,7 +45,7 @@
         })),
         research_average: 1,
         economy_average: 1,
-        society_average: 1,
+        inclusion_average: 1,
         total_average: 1,
         global_year: $global_year,
       })
@@ -95,8 +95,8 @@
           });
           d.economy_average = mean(get_averages);
           d["economy_average_weighted"] = d.economy_average * v.multiplier;
-        } else if (v.metric_name == "Society") {
-          d["society_average_weighted"] = d.society_average * v.multiplier;
+        } else if (v.metric_name == "Inclusion") {
+          d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
           v.metadata.forEach((x) => {
             d.metadata.forEach((y) => {
               try {
@@ -111,13 +111,13 @@
               } catch (error) {}
             });
           });
-          d.society_average = mean(get_averages);
-          d["society_average_weighted"] = d.society_average * v.multiplier;
+          d.inclusion_average = mean(get_averages);
+          d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
         }
       });
 
       d.pillars_used = 0;
-      if (d.society_average_weighted) {
+      if (d.inclusion_average_weighted) {
         d.pillars_used = d.pillars_used + 1;
       }
       if (d.economy_average_weighted) {
@@ -128,14 +128,14 @@
       }
 
       d.total_average = mean([
-        d.society_average_weighted,
+        d.inclusion_average_weighted,
         d.economy_average_weighted,
         d.research_average_weighted,
       ]);
 
       country_cut.forEach((d) => {
         for (let x of [
-          "society_average_weighted",
+          "inclusion_average_weighted",
           "economy_average_weighted",
           "research_average_weighted",
         ]) {
@@ -147,35 +147,36 @@
 
       d.total_average =
         sum([
-          d.society_average_weighted,
+          d.inclusion_average_weighted,
           d.economy_average_weighted,
           d.research_average_weighted,
         ]) / d.pillars_used;
 
-      d.society_share = d.society_average_weighted / d.pillars_used;
+      d.inclusion_share = d.inclusion_average_weighted / d.pillars_used;
       d.economy_share = d.economy_average_weighted / d.pillars_used;
       d.research_share = d.research_average_weighted / d.pillars_used;
 
       d.total_sum =
         d.research_average_weighted +
         d.economy_average_weighted +
-        d.society_average_weighted;
+        d.inclusion_average_weighted;
 
       country_cut.forEach((d) => {
-        for (let x of ["society_share", "economy_share", "research_share"]) {
+        for (let x of ["inclusion_share", "economy_share", "research_share"]) {
           if (!d[x]) {
             d[x] = 0;
           }
         }
       });
     });
-
+    console.log(country_cut);
     usable_country_cut = country_cut.filter((d) => {
       return (
         Array.from(d.metadata.map((x) => x.PublishYear)).indexOf($global_year) >
-        0
+        -1
       );
     });
+    console.log(usable_country_cut);
     usable_country_cut.forEach((d) => {
       if (!d.total_average) {
         d.total_average = 0;
@@ -232,71 +233,79 @@
             Weighted Index Scores in <span class="research"
               >Research and Development</span
             >, <span class="economy"> Economy</span> and
-            <span class="society">Society</span>
+            <span class="inclusion">Inclusion</span>
           </h3>
         </div>
         <div class="slider">
           <YearSlider year="{$global_year}" name="global_year_slider" />
         </div>
       </div>
-      <LayerCake
-        y="{(d) => d.data[xKey]}"
-        x="{yKey}"
-        z="{zKey}"
-        yScale="{scaleBand().paddingInner([0.05]).round(true)}"
-        yDomain="{country_names}"
-        zScale="{scaleOrdinal()}"
-        zDomain="{seriesNames}"
-        zRange="{seriesColors}"
-        flatData="{flatten(series)}"
-        data="{series}"
-        padding="{{ top: 0, right: 0, bottom: 20, left: 140 }}"
-      >
-        <Svg>
-          <AxisX axis_position="{global_axis_position}" />
-          <AxisY textAnchor="end" spacing="136" text_size="" />
-        </Svg>
-        <Html>
-          <Annotation
-            content="Click a bar to visit that country's profile"
-            top="200"
-            left="600"
-          />
-          <!-- <Tooltip
-            type="global"
-            x="{current_x}"
-            y="{current_y}"
-            show_tooltip="{show}"
-          /> -->
-        </Html>
-        <Svg>
-          <Bars
-            additional_data="{country_cut}"
-            stacked="{true}"
-            on:message="{updateTooltip}"
-          />
-        </Svg>
-      </LayerCake>
+      <div class="layercake">
+        <LayerCake
+          y="{(d) => d.data[xKey]}"
+          x="{yKey}"
+          z="{zKey}"
+          yScale="{scaleBand().paddingInner([0.05]).round(true)}"
+          yDomain="{country_names}"
+          zScale="{scaleOrdinal()}"
+          zDomain="{seriesNames}"
+          zRange="{seriesColors}"
+          flatData="{flatten(series)}"
+          data="{series}"
+          padding="{{ top: 0, right: 0, bottom: 20, left: 140 }}"
+        >
+          <Svg>
+            <AxisX axis_position="{global_axis_position}" />
+            <AxisY textAnchor="end" spacing="136" text_size="" />
+          </Svg>
+          <Html>
+            <Annotation
+              content="Click a bar to visit that country's profile"
+              top="70"
+              left="470"
+            />
+          </Html>
+          <Svg>
+            <Bars
+              additional_data="{country_cut}"
+              stacked="{true}"
+              on:message="{updateTooltip}"
+            />
+          </Svg>
+        </LayerCake>
+      </div>
     </div>
-    <!-- <div class="fade"></div> -->
   </div>
 {/if}
 
 <style>
   .chart-container {
     width: 100%;
-    height: 100vh;
+    height: 92vh;
     background-clip: border-box;
     border: 1px solid #e3e6f0;
     border-radius: 0.35rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
+
     pointer-events: all;
+  }
+
+  .primary-title {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
   }
 
   .chart-inner {
     width: 100%;
-    height: 150vh;
+    height: 90vh;
+    padding: 1.25rem;
+    pointer-events: all;
+  }
+
+  .layercake {
+    width: 100%;
+    height: 80vh;
+    padding-top: 0;
     padding: 1.25rem;
     pointer-events: all;
   }
@@ -307,6 +316,13 @@
     direction: column;
     justify-content: space-between;
     align-items: baseline;
+    margin-top: 0rem;
+  }
+
+  .secondary-title {
+    padding-bottom: 0px;
+    margin-bottom: 0.2rem;
+    margin-top: 0rem;
   }
 
   .shadow {
@@ -334,7 +350,7 @@
   .economy {
     color: var(--dark-green);
   }
-  .society {
+  .inclusion {
     color: var(--dark-plum);
   }
 </style>

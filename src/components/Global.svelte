@@ -22,9 +22,9 @@
 <style>
   .line {
     width: 1px;
-    height: 250px;
-
-    max-height: 350px;
+    height: 350px;
+    align-self: center;
+    max-height: 400px;
     justify-self: center;
     /* : calc(100% - 6em); */
     margin-left: 20px;
@@ -37,16 +37,22 @@
   .top-right {
     width: 1px;
     flex-grow: 1;
+    max-width: 550px;
+    overflow-x: visible;
+    overflow-y: visible;
+    height: 100%;
+    /* max-height: 100%; */
   }
   .upper {
     display: flex;
     direction: column;
     justify-content: space-between;
-    /* align-items: center; */
+    overflow-x: visible;
     width: calc(100% - 25px);
     max-width: 1100px;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     height: 100%;
+    max-height: 426px;
     margin: 0 auto;
   }
   .lower {

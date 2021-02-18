@@ -10,7 +10,7 @@
     ranked_metric,
     tooltip_text,
   } from "../stores/vibrancy.js";
-  import codebook from "../data/demo/codebook.csv";
+  import codebook from "../data/demo/codebook_2.csv";
   import Tooltip from "./Tooltip.svelte";
   import Line from "./Line.svelte";
   import Area from "./Area.svelte";
@@ -172,8 +172,10 @@
             show_tooltip="{show1}"
           />
           <h3>
-            {codebook.find((d) => d.shortname_raw == $temporal_metric_1)
-              .metric_name}<span
+            {codebook
+              .find((d) => d.shortname_raw == $temporal_metric_1)
+              .metric_name.replace("*", "")
+              .replace("Number of ", "")}<span
               on:mouseout="{handleMouseout}"
               on:mouseenter="{handleMouseover1(
                 codebook.find((d) => d.shortname_raw == $temporal_metric_1)
@@ -182,7 +184,8 @@
               ><Icon
                 pointer-events="{true}"
                 name="info"
-                strokeWidth="2"
+                strokeWidth="{2}"
+                dimension="{0.9}"
               /></span
             >
             in {$country}, {chart_values1[0].year}-{chart_values1.slice(-1)[0]
@@ -226,17 +229,20 @@
             show_tooltip="{show2}"
           />
           <h3>
-            {codebook.find((d) => d.shortname_raw == $temporal_metric_2)
-              .metric_name}<span
+            {codebook
+              .find((d) => d.shortname_raw == $temporal_metric_2)
+              .metric_name.replace("*", "")
+              .replace("Number of ", "")}<span
               on:mouseout="{handleMouseout}"
               on:mouseenter="{handleMouseover2(
                 codebook.find((d) => d.shortname_raw == $temporal_metric_2)
                   .Definition
               )}"
               ><Icon
-                pointer-events="{true}"
+                pointer-events="{false}"
                 name="info"
-                strokeWidth="2"
+                strokeWidth="{2}"
+                dimension="{0.9}"
               /></span
             >
             in {$country}, {chart_values2[0].year}-{chart_values2.slice(-1)[0]

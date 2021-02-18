@@ -8,16 +8,15 @@
   import Bars from "./Bars.svelte";
   import {
     data,
-    temporal_metric_1,
-    temporal_metric_2,
-  } from "../stores/vibrancy.js";
-  import {
     national_year,
     country,
     variables,
     number_of_metrics,
     ranked_metric,
+    temporal_metric_1,
+    temporal_metric_2,
   } from "../stores/vibrancy.js";
+
   import { onMount, createEventDispatcher } from "svelte";
   import { group, mean, ascending, sum, descending, filter } from "d3-array";
   import { stack } from "d3-shape";
@@ -36,9 +35,9 @@
   let ranked_data;
   let ranked_values;
   const dispatch = createEventDispatcher();
-  import codebook from "../data/demo/codebook.csv";
+  import codebook from "../data/demo/codebook_2.csv";
 
-  const seriesNames = ["Research and Development", "Economy", "Society"];
+  const seriesNames = ["Research and Development", "Economy", "Inclusion"];
 
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
 
@@ -73,6 +72,8 @@
       temp["display"] = d.display_name
         .replace("Number of", "")
         .replace("per capita", "PC")
+        .replace("AI ", "")
+        .replace(" (Job Titles)", "")
         .replace("*", "");
       temp["pillar"] = d.pillar;
       temp["variable"] = d.variable_name;
@@ -163,7 +164,7 @@
             zRange="{seriesColors}"
             yDomain="{chart_values.map((d) => d.display)}"
             data="{chart_values}"
-            padding="{{ top: 0, right: 0, bottom: 20, left: 180 }}"
+            padding="{{ top: 0, right: 0, bottom: 20, left: 186 }}"
           >
             <Html pointerEvents="{false}">
               {#if type == "national"}
@@ -176,12 +177,12 @@
               <Annotation
                 content="Click a bar to see where a country ranks on that variable"
                 top="200"
-                left="600"
+                left="500"
               />
             </Html>
             <Svg>
               <AxisX />
-              <AxisY textAnchor="end" text_size=".8" spacing="175" />
+              <AxisY textAnchor="end" text_size=".8" spacing="180" />
             </Svg>
             <Svg>
               <Bars
@@ -194,19 +195,22 @@
         </div>
       </div>
     </div>
-    <div class="chart-container rank-container shadow border-left-primary">
+    <div class="chart-container rank-container shadow border-right-primary">
       <div class="chart-inner">
-        <h2>
-          {codebook.find((d) => d.shortname_scaled == $ranked_metric)
-            .metric_name}, {$national_year}
-        </h2>
-        <span
-          >Rank: {text_sorted.indexOf(
-            text_sorted.find((d) => {
-              return d.country_name == $country;
-            })
-          ) + 1} of {text_sorted.length} TK</span
-        >
+        <div class="title-container">
+          <h2 class="rank-title">
+            {codebook
+              .find((d) => d.shortname_scaled == $ranked_metric)
+              .metric_name.replace("*", "")}, {$national_year}
+          </h2>
+          <span class="rank-subhead"
+            >Rank: {text_sorted.indexOf(
+              text_sorted.find((d) => {
+                return d.country_name == $country;
+              })
+            ) + 1} of {text_sorted.length} TK</span
+          >
+        </div>
         <div class="layercake">
           <LayerCake
             x="value"
@@ -246,7 +250,7 @@
   .overall-container {
     display: flex;
     direction: column;
-    justify-content: center;
+    justify-content: space-between;
     height: 100%;
   }
 
@@ -256,34 +260,42 @@
     direction: column;
     justify-content: space-between;
     align-items: baseline;
+    margin-top: 0rem;
   }
   .metric-container {
-    width: 65%;
-    height: 100%;
+    width: 70%;
+    height: 85vh;
   }
 
   .primary-title {
     padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+
+  .rank-title {
+    padding-bottom: 0.1rem;
+    margin-top: 0.3rem;
   }
 
   .secondary-title {
     padding-bottom: 0px;
+    margin-bottom: 0.4rem;
+    margin-top: 0rem;
   }
 
   .chart-container {
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     background-clip: border-box;
     border: 1px solid #e3e6f0;
     border-radius: 0.35rem;
-    /* overflow-y: scroll; */
-    /* overflow-x: hidden; */
     pointer-events: all;
   }
 
   .chart-inner {
     width: 100%;
-    height: 100%;
+    height: 85vh;
     padding: 1.25rem;
     pointer-events: all;
   }
@@ -293,9 +305,9 @@
     height: 70vh;
   }
   .rank-container {
-    width: 35%;
-    height: 100%;
-    line-height: 1.4em;
+    width: 25%;
+    height: 85vh;
+    line-height: 1.5em;
   }
 
   .shadow {
@@ -304,6 +316,10 @@
 
   .border-left-primary {
     border-left: 0.25rem solid #a3d2f8 !important;
+  }
+
+  .border-right-primary {
+    border-right: 0.25rem solid #a3d2f8 !important;
   }
 
   .research {

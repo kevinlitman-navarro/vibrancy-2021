@@ -34,5 +34,12 @@
     font-family: Circular;
     color: var(--dark-blue);
     font-weight: 700;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .explanation {
+    padding-top: 0;
+    margin-top: 0;
   }
 </style>

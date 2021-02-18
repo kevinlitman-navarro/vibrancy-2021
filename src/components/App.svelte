@@ -1,5 +1,5 @@
 <script>
-  import Intro from "./Intro.svelte";
+  import Heatmap from "./Heatmap.svelte";
   import Header from "./Header.svelte";
   import Global from "./Global.svelte";
   import National from "./National.svelte";
@@ -7,7 +7,7 @@
   import { csv } from "d3-fetch";
   import { variables, data, toggle } from "../stores/vibrancy.js";
   import { group } from "d3-array";
-  import codebook from "../data/demo/codebook.csv";
+  import codebook from "../data/demo/codebook_2.csv";
   import { onMount } from "svelte";
 
   let variable_names = [];
@@ -33,7 +33,7 @@
     variable_names.push("PublishYear");
     console.log(variable_names);
 
-    csv("assets/data/full_data_2.csv").then((raw) => {
+    csv("assets/data/full_data_3.csv").then((raw) => {
       $data = raw;
       $data.forEach((z) => {
         variable_names.forEach((x) => {
@@ -49,9 +49,9 @@
   $: console.log($toggle);
 </script>
 
-<section class="header">
+<!-- <section class="header">
   <Header />
-</section>
+</section> -->
 {#if $data}
   <section class="story">
     <section class="global" class:active="{$toggle == 'Global'}">
@@ -61,16 +61,30 @@
       <National />
     </section>
   </section>
+  <div class="line"></div>
   <section class="methodology">
     <Methodology />
   </section>
 {/if}
 
+<!-- <section class="header">
+  <Header />
+</section> -->
 <style>
   .header {
     width: 100%;
     height: 10vh;
     position: sticky;
+  }
+
+  .line {
+    height: 1px;
+    width: 80%;
+    margin: 2rem auto 2rem auto;
+    /* align-self: center; */
+    /* margin: auto 0; */
+    /* height: 90%; */
+    background-color: var(--gray);
   }
   .story {
     width: 100%;
@@ -82,11 +96,12 @@
     width: 100%;
     margin: 0 auto;
     height: 100%;
-    pointer-events: all;
+    /* pointer-events: all; */
   }
   .global {
     display: none;
     height: 100%;
+    overflow-x: visible;
   }
 
   .active {

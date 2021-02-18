@@ -43,16 +43,19 @@
   }
   .top-right {
     max-width: 500px;
-    width: 50%;
+
     align-self: center;
     justify-self: center;
   }
 
   .line0 {
-    width: 0.2%;
-    /* align-self: center; */
-    /* margin: auto 0; */
-    /* height: 90%; */
+    width: 1px;
+    height: 350px;
+    align-self: center;
+    max-height: 400px;
+    justify-self: center;
+    margin-left: 20px;
+    margin-right: 20px;
     background-color: var(--gray);
   }
   .upper {
@@ -71,7 +74,7 @@
   }
 
   .line {
-    height: 0.1rem;
+    height: 1px;
     width: 80%;
     margin: 2rem auto 2rem auto;
     /* align-self: center; */
