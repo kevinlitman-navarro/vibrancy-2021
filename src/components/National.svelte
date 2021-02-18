@@ -86,6 +86,7 @@
   .mid {
     width: 90%;
     height: 100%;
+    max-width: 1300px;
     margin: 0 auto;
     margin-bottom: 2rem;
     display: flex;
