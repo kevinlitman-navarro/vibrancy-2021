@@ -33,7 +33,7 @@
     variable_names.push("PublishYear");
     console.log(variable_names);
 
-    csv("assets/data/full_data_3.csv").then((raw) => {
+    csv("assets/data/full_data_4.csv").then((raw) => {
       $data = raw;
       $data.forEach((z) => {
         variable_names.forEach((x) => {

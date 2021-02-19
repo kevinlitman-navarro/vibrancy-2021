@@ -20,7 +20,7 @@
   import { onMount, createEventDispatcher } from "svelte";
   import { group, mean, ascending, sum, descending, filter } from "d3-array";
   import { stack } from "d3-shape";
-  import { scaleBand, scaleOrdinal } from "d3-scale";
+  import { scaleBand, scaleOrdinal, scaleLinear } from "d3-scale";
   let text_sorted;
   let mounted = false;
   let country_cut;
@@ -158,7 +158,7 @@
             y="{yKey}"
             z="{zKey}"
             yScale="{scaleBand().paddingInner([0.05]).round(true)}"
-            xDomain="{[0, null]}"
+            xDomain="{[0, 100]}"
             zScale="{scaleOrdinal()}"
             zDomain="{seriesNames}"
             zRange="{seriesColors}"
