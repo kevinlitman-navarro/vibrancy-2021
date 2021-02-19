@@ -1,7 +1,7 @@
 <script>
   import Slider from "./Slider.svelte";
   import Collapse from "./Collapse.svelte";
-  import { variables } from "../stores/vibrancy.js";
+  import { variables, global_year } from "../stores/vibrancy.js";
   import { scaleOrdinal } from "d3-scale";
   const seriesNames = ["Reseach and Development", "Economy", "Inclusion"];
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
