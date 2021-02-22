@@ -116,4 +116,12 @@
   .active {
     display: block;
   }
+
+  @media only screen and (max-width: 768px) {
+    .upper {
+      /* grid-auto-flow: row;
+      grid-auto-rows: (minmax(0, 1fr)); */
+      /* background-color: black; */
+    }
+  }
 </style>

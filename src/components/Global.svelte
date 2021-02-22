@@ -8,7 +8,7 @@
   <div class="intro">
     <Intro />
   </div>
-  <div class="line"></div>
+  <!-- <div class="line"></div> -->
   <div class="top-right">
     <GlobalMetrics />
   </div>
@@ -32,27 +32,35 @@
     background-color: var(--gray);
   }
   .intro {
-    max-width: 550px;
+    /* max-width: 550px; */
+    /* width: 50%; */
   }
   .top-right {
-    width: 1px;
-    flex-grow: 1;
-    max-width: 550px;
+    /* width: 50%; */
+    /* flex-grow: 1; */
+    /* max-width: 550px; */
     overflow-x: visible;
     overflow-y: visible;
     height: 100%;
     /* max-height: 100%; */
   }
   .upper {
-    display: flex;
-    direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    grid-gap: 60px;
+    align-items: stretch;
+
+    /* justify-content: space-between; */
     overflow-x: visible;
-    width: calc(100% - 25px);
-    max-width: 1100px;
+    width: 100%;
+    padding: 0 30px;
+    /* -25 px */
+    max-width: 1400px;
+    /* 1100 px */
     margin-bottom: 3rem;
     height: 100%;
-    max-height: 426px;
+    /* max-height: 426px; */
     margin: 0 auto;
   }
   .lower {
@@ -67,5 +75,16 @@
   .chart {
     width: 100%;
     margin: 0 auto;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .upper {
+      grid-auto-flow: row;
+      grid-gap: 35px;
+    }
+
+    .rank-container {
+      display: none;
+    }
   }
 </style>

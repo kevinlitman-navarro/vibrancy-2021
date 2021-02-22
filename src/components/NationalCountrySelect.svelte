@@ -11,7 +11,7 @@
 
 <div class="upper">
   <div class="dropdown">
-    <p class="annotation">SELECT A COUNTRY</p>
+    <h2 class="annotation">Country Selection</h2>
     <Dropdown
       items="{[...new Set($data.map((d) => d.CountryName))].sort(ascending)}"
       countries="true"
@@ -41,5 +41,6 @@
 
   .annotation {
     font-weight: bold;
+    color: var(--dark-blue);
   }
 </style>

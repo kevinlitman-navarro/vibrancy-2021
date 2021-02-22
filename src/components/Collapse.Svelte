@@ -18,7 +18,7 @@
       expanded = research_clicked;
     } else if (name == "Economy") {
       expanded = economy_clicked;
-    } else if (name == "Inclusion") {
+    } else if (name == "Inclusion*") {
       expanded = inclusion_clicked;
     }
     expanded = expanded;
@@ -77,7 +77,6 @@
     width: 100%;
     display: flex;
     cursor: pointer;
-
     flex-wrap: wrap;
   }
   .carrot {

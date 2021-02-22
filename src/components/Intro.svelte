@@ -7,13 +7,13 @@
   let value = "Global";
 </script>
 
-<h1>Global Vibrancy Tool</h1>
+<h1>Global AI Vibrancy Tool</h1>
 <div class="explanation">
   <p>
-    The AI Vibrancy Tool compares countries’ activities in the AI industry. It
-    is tempting to provide a single ranking of countries, but such rankings are
-    notoriously tricky. Projecting complex, heterogeneous measures down to a
-    single number (or even a small set of numbers) is fraught with
+    The Global AI Vibrancy Tool compares countries’ activities in the AI
+    industry. It is tempting to provide a single ranking of countries, but such
+    rankings are notoriously tricky. Projecting complex, heterogeneous measures
+    down to a single number (or even a small set of numbers) is fraught with
     methodological subtleties, and can be highly subjective or skewed.
   </p>
 
@@ -23,7 +23,7 @@
     country’s success across selected metrics. The <b>national view</b> includes
     a ranking across all metrics within a selected country and detailed
     timeseries data going back to 2015 for all available metrics.
-    <b>Toggle between views using the buttons above.</b>
+    <b>Toggle between views using the buttons below.</b>
   </p>
 </div>
 

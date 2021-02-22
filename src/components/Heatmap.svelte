@@ -195,7 +195,8 @@
   .row {
     display: block;
     margin: 0;
-    line-height: 0.8em;
+    padding: 0;
+    height: 20px;
   }
 
   .no-data {
@@ -263,6 +264,7 @@
     min-width: 20px;
     min-height: 10px;
     height: 20px;
+    max-height: 20px;
   }
 
   .container {

@@ -9,7 +9,7 @@
   <div class="intro">
     <Intro />
   </div>
-  <div class="line0"></div>
+  <!-- <div class="line0"></div> -->
   <div class="top-right">
     <NationalCountrySelect />
   </div>
@@ -38,10 +38,43 @@
 
 <style>
   .intro {
-    max-width: 550px;
-    width: 50%;
+    /* max-width: 550px;
+    width: 50%; */
   }
+
   .top-right {
+    /* width: 50%; */
+    /* flex-grow: 1; */
+    /* max-width: 550px; */
+    overflow-x: visible;
+    overflow-y: visible;
+    height: 100%;
+    /* max-height: 100%; */
+  }
+  .upper {
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    grid-gap: 60px;
+    align-items: stretch;
+
+    /* justify-content: space-between; */
+    overflow-x: visible;
+    width: 100%;
+    padding: 0 30px;
+    /* -25 px */
+    max-width: 1400px;
+    /* 1100 px */
+    margin-bottom: 3rem;
+    height: 100%;
+    /* max-height: 426px; */
+    margin: 0 auto;
+
+    margin-bottom: 2rem;
+  }
+
+  /* old styling */
+  /* .top-right {
     max-width: 500px;
 
     align-self: center;
@@ -67,7 +100,7 @@
     height: 100%;
     margin: 0 auto;
     margin-bottom: 2rem;
-  }
+  } */
   .chart {
     width: 100%;
     margin: 0 auto;
@@ -84,9 +117,10 @@
   }
 
   .mid {
-    width: 90%;
+    width: 100%;
     height: 100%;
-    max-width: 1300px;
+    max-width: 1400px;
+    padding: 0 30px;
     margin: 0 auto;
     margin-bottom: 2rem;
     display: flex;
@@ -94,11 +128,22 @@
   }
 
   .lower {
-    width: 90%;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 30px;
     margin: 0 auto;
     /* display: flex;
     align-items: center; */
     margin-bottom: 6rem;
     height: 100%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .upper {
+      grid-auto-flow: row;
+      grid-gap: 35px;
+      /* grid-auto-rows: (minmax(0, 1fr)); */
+      /* background-color: black; */
+    }
   }
 </style>

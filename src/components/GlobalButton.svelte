@@ -55,25 +55,24 @@
 
   .button-container {
     cursor: pointer;
-    background-color: #3A8DC7;
+    background-color: #3a8dc7;
     display: block;
     background: white;
     border: var(--dark-blue) solid 1px;
     margin-left: -1px;
     max-width: 33%;
+    font-size: 14px;
   }
 
-
-
   .button {
-    background:none;
-    border:none;
+    background: none;
+    border: none;
     color: var(--dark-blue);
     display: block;
   }
 
   .button-container:first-of-type {
-    margin-left:0px;
+    margin-left: 0px;
     border-radius: 6px 0 0 6px;
   }
 

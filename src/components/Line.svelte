@@ -5,7 +5,7 @@
 
   export let stroke = "#ab00d6";
 
-  const seriesNames = ["Research and Development", "Economy", "Inclusion"];
+  const seriesNames = ["Research and Development", "Economy", "Inclusion*"];
 
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
   const scale = scaleOrdinal().domain(seriesNames).range(seriesColors);

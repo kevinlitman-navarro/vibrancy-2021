@@ -19,7 +19,7 @@
   $: update(multiplier);
 </script>
 
-{#if variable != "Research and Development" && variable != "Economy" && variable != "Inclusion"}
+{#if variable != "Research and Development" && variable != "Economy" && variable != "Inclusion*"}
   <span class="slider-name"
     >{variable
       .replace("Number of ", "")
@@ -36,6 +36,7 @@
   <span class="high annotation">High importance</span>
 {/if}
 <!-- <p>{multiplier}</p> -->
+
 <input
   name="{name}"
   id="{id}"

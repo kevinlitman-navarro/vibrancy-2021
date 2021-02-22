@@ -12,15 +12,56 @@
 
 /*
 ********************
+	Source
+********************
+*/
+
+@font-face {
+  font-family: "Source";
+  src: url("../hai-fonts/source/SourceSansPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source";
+  src: url("../hai-fonts/source/SourceSansPro-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source";
+  src: url("../hai-fonts/source/SourceSansPro-Black.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source";
+  src: url("../hai-fonts/source/SourceSansPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+/*
+********************
 	Circular
 ********************
 */
 
 @font-face {
   font-family: "Circular";
-  src: url("../pudding-fonts/circular/CircularStd-Medium.woff2") format("woff2"),
-    url("../pudding-fonts/national/CircularStd-Medium.woff") format("woff");
-  font-weight: 500;
+  src: url("../hai-fonts/circular/CircularStd-Medium.otf") format("opentype");
+  font-weight: 400;
   font-style: normal;
   font-stretch: normal;
   font-display: swap;
@@ -28,8 +69,7 @@
 
 @font-face {
   font-family: "Circular";
-  src: url("../pudding-fonts/circular/CircularStd-Book.woff2") format("woff2"),
-    url("../pudding-fonts/national/CircularStd-Book.woff") format("woff");
+  src: url("../hai/circular/CircularStd-Book.otf") format("opentype");
   font-weight: 300;
   font-style: normal;
   font-stretch: normal;
@@ -38,9 +78,8 @@
 
 @font-face {
   font-family: "Circular";
-  src: url("../pudding-fonts/circular/CircularStd-Black.woff2") format("woff2"),
-    url("../pudding-fonts/national/CircularStd-Black.woff") format("woff");
-  font-weight: 700;
+  src: url("../hai-fonts/circular/CircularStd-Black.otf") format("opentype");
+  font-weight: 800;
   font-style: normal;
   font-stretch: normal;
   font-display: swap;
@@ -48,14 +87,12 @@
 
 @font-face {
   font-family: "Circular";
-  src: url("../pudding-fonts/circular/CircularStd-Bold.woff2") format("woff2"),
-    url("../pudding-fonts/national/CircularStd-Bold.woff") format("woff");
-  font-weight: 500;
+  src: url("../hai-fonts/circular/CircularStd-Bold.otf") format("opentype");
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal;
   font-display: swap;
 }
-
 
 /*
 ********************

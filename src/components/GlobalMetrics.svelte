@@ -38,6 +38,7 @@
   h2 {
     margin-bottom: 0px;
     padding-bottom: 0px;
+    color: var(--dark-blue);
   }
 
   .explanation {

@@ -35,18 +35,18 @@ body {
 }
 
 h1 {
-  font-family: "Circular";
+  font-family: var(--circular);
   font-weight: 700;
 }
 
 h2 {
-  font-family: "Circular";
-  font-weight: 800;
+  font-family: var(--circular);
+  font-weight: 700;
 }
 
 h3 {
-  font-family: "Circular";
-  font-weight: 300;
+  font-family: var(--circular);
+  font-weight: 700;
 }
 
 h1,
@@ -59,8 +59,8 @@ h6 {
 }
 p {
   margin: 1rem 0;
-  font-family: "Circular";
-  font-weight:300;
+  font-family: var(--source);
+  font-weight: 400;
 }
 
 text {

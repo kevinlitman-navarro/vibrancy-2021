@@ -96,7 +96,7 @@
           });
           d.economy_average = mean(get_averages);
           d["economy_average_weighted"] = d.economy_average * v.multiplier;
-        } else if (v.metric_name == "Inclusion") {
+        } else if (v.metric_name == "Inclusion*") {
           d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
           v.metadata.forEach((x) => {
             d.metadata.forEach((y) => {
@@ -235,7 +235,7 @@
           v.metric_name
             .replace("Research and Development", "research")
             .replace("Economy", "economy")
-            .replace("Inclusion", "inclusion")
+            .replace("Inclusion*", "inclusion")
             .concat("_total")
         ] = sum(get_averages);
       });
@@ -324,7 +324,7 @@
             Weighted Index Scores in <span class="research"
               >Research and Development</span
             >, <span class="economy"> Economy</span> and
-            <span class="inclusion">Inclusion</span>
+            <span class="inclusion">Inclusion*</span>
           </h3>
         </div>
         <div class="slider">
@@ -373,6 +373,8 @@
   .chart-container {
     width: 100%;
     height: 92vh;
+
+    min-height: 640px;
     background-clip: border-box;
     border: 1px solid #e3e6f0;
     border-radius: 0.35rem;
@@ -384,6 +386,7 @@
     padding-bottom: 0px;
     margin-bottom: 0px;
     margin-top: 0px;
+    line-height: 1.7rem;
   }
 
   .chart-inner {
@@ -443,5 +446,15 @@
   }
   .inclusion {
     color: var(--dark-plum);
+  }
+
+  @media only screen and (max-width: 634px) {
+    .chart-container {
+      min-height: 690px;
+    }
+
+    .secondary-title {
+      line-height: 1.4rem;
+    }
   }
 </style>

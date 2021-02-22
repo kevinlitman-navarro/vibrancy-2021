@@ -42,7 +42,7 @@
   }
 
   .annotation {
-    max-width: 40%;
+    max-width: 140px;
   }
 
   .left {

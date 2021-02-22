@@ -69,7 +69,7 @@
 
 {#if mounted}
   <div class="overall-container">
-    <Collapse headerText="Methodology and Data" type="header">
+    <Collapse headerText="Methodology and Metrics" type="header">
       <div class="upper">
         <p class="description">
           Methodology write up for ranking here -- "Lorem ipsum dolor sit amet,
@@ -81,7 +81,7 @@
           proident, sunt in culpa qui officia deserunt mollit anim id est
           laborum."
         </p>
-        <h1>Data Dictionary</h1>
+        <h1>Metric Definitions</h1>
         <p>Read about the variables included in the 2021 AI Index Report.</p>
         {#each $variables as v}
           <ul>
@@ -136,8 +136,9 @@
 
 <style>
   .overall-container {
-    width: calc(100% - 25px);
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 30px;
     margin: 0 auto;
     pointer-events: all;
     margin-top: 2rem;
@@ -204,6 +205,7 @@
 
   .heatmap {
     margin: 0 auto;
+    min-height: 700px;
     height: 98vh;
     position: relative;
   }

@@ -37,7 +37,7 @@
   const dispatch = createEventDispatcher();
   import codebook from "../data/demo/codebook_2.csv";
 
-  const seriesNames = ["Research and Development", "Economy", "Inclusion"];
+  const seriesNames = ["Research and Development", "Economy", "Inclusion*"];
 
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
 
@@ -208,7 +208,7 @@
               text_sorted.find((d) => {
                 return d.country_name == $country;
               })
-            ) + 1} of {text_sorted.length} TK</span
+            ) + 1} of {text_sorted.length} countries</span
           >
         </div>
         <div class="layercake">
@@ -252,6 +252,7 @@
     direction: column;
     justify-content: space-between;
     height: 100%;
+    min-height: 85vh;
   }
 
   .upper {
@@ -265,12 +266,14 @@
   .metric-container {
     width: 70%;
     height: 85vh;
+    min-height: 960px;
   }
 
   .primary-title {
     padding-bottom: 0px;
     margin-bottom: 0px;
     margin-top: 0px;
+    line-height: 1.9rem;
   }
 
   .rank-title {
@@ -287,6 +290,7 @@
   .chart-container {
     /* width: 100%; */
     height: 100%;
+    min-height: 680px;
     background-clip: border-box;
     border: 1px solid #e3e6f0;
     border-radius: 0.35rem;
@@ -303,6 +307,7 @@
   .layercake {
     width: 100%;
     height: 70vh;
+    min-height: 550px;
   }
   .rank-container {
     width: 25%;
@@ -331,5 +336,37 @@
   }
   .society {
     color: var(--dark-plum);
+  }
+
+  @media only screen and (max-width: 768px) {
+    .rank-container {
+      display: none;
+    }
+
+    .metric-container {
+      width: 100%;
+    }
+
+    .primary-title {
+      line-height: 1.9rem;
+    }
+  }
+
+  @media screen and (max-width: 1166px) {
+    .chart-container {
+      min-height: 720px;
+    }
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 810px) {
+    .chart-container {
+      min-height: 770px;
+    }
+  }
+
+  @media screen and (min-width: 400px) {
+    .chart-container {
+      min-height: 750px;
+    }
   }
 </style>

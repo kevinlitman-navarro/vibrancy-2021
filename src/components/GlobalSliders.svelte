@@ -3,7 +3,7 @@
   import Collapse from "./Collapse.svelte";
   import { variables, global_year } from "../stores/vibrancy.js";
   import { scaleOrdinal } from "d3-scale";
-  const seriesNames = ["Reseach and Development", "Economy", "Inclusion"];
+  const seriesNames = ["Reseach and Development", "Economy", "Inclusion*"];
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
   const scale = scaleOrdinal().domain(seriesNames).range(seriesColors);
   let updatePillar = (event) => {
@@ -55,7 +55,7 @@
             economy_clicked = !economy_clicked;
             research_clicked = false;
             inclusion_clicked = false;
-          } else if (d.metric_name == 'Inclusion') {
+          } else if (d.metric_name == 'Inclusion*') {
             inclusion_clicked = !inclusion_clicked;
             economy_clicked = false;
             research_clicked = false;
@@ -89,7 +89,7 @@
             class="collapsed-sliders"
             headerText="{d.metric_name}"
             color="{scale(d.metric_name)}"
-            style="overflow-y:{d.metric_name == 'Inclusion'
+            style="overflow-y:{d.metric_name == 'Inclusion*'
               ? 'visible'
               : 'scroll'};height:{d.metric_name == 'Economy'
               ? '100px'
