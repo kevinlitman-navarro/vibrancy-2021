@@ -45,7 +45,7 @@
 
   /* water.css */
 
-  --body-font: var(--sans);
+  --body-font: var(--source);
   --background-body: var(--white);
   --background-ui: var(--off-white);
   --background-alt: var(--off-white);

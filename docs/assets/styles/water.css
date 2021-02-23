@@ -1,6 +1,6 @@
 /* adapted from https://github.com/kognise/water.css */
 :root {
-  --body-font: "Circular";
+  --body-font: var(--source);
   --background-body: #fff;
   --background-ui: #f7f7f7;
   --background-alt: #f7f7f7;

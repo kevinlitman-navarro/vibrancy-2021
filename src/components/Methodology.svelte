@@ -156,7 +156,7 @@
                 {$methodology_year} AI Vibrancy Matrix
               </h1>
               <h3 class="secondary-title">
-                Normalized Score (0-100) of 24 Metrics
+                Normalized Score (0-100) of 22 Metrics
               </h3>
             </div>
             <div class="slider">
