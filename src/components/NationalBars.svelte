@@ -72,6 +72,7 @@
       temp["display"] = d.display_name
         .replace("Number of", "")
         .replace("per capita", "PC")
+        .replace("Per Capita", "PC")
         .replace("AI ", "")
         .replace(" (Job Titles)", "")
         .replace("*", "");
@@ -124,11 +125,18 @@
   onMount(() => {
     updateCountryData();
     mounted = true;
+    if (screen.width <= 415) {
+      left_padding = 90;
+      y_spacing = 88;
+    }
   });
 
   $: $national_year, updateCountryData(), updateRankChart();
   $: $ranked_metric, updateRankChart();
   $: $country, updateCountryData(), updateRankChart();
+
+  let left_padding = 150;
+  let y_spacing = 146;
 </script>
 
 {#if mounted}
@@ -145,7 +153,7 @@
               Normalized Scores in <span class="research"
                 >Research and Development</span
               >, <span class="economy"> Economy</span> and
-              <span class="society">Society</span>
+              <span class="society">Inclusion*</span>
             </h3>
           </div>
           <div class="slider">
@@ -164,26 +172,30 @@
             zRange="{seriesColors}"
             yDomain="{chart_values.map((d) => d.display)}"
             data="{chart_values}"
-            padding="{{ top: 0, right: 0, bottom: 20, left: 186 }}"
+            padding="{{ top: 0, right: 0, bottom: 20, left: left_padding }}"
           >
-            <Html pointerEvents="{false}">
-              {#if type == "national"}
+            <div class="annotation">
+              <Html pointerEvents="{false}">
+                <!-- {#if type == "national"}
                 <Tooltip
                   x="{current_x}"
                   y="{current_y}"
                   show_tooltip="{show}"
                 />
-              {/if}
-              <Annotation
-                content="Click a bar to see where a country ranks on that variable"
-                top="200"
-                left="500"
-              />
-            </Html>
-            <Svg>
-              <AxisX />
-              <AxisY textAnchor="end" text_size=".8" spacing="180" />
-            </Svg>
+              {/if} -->
+                <Annotation
+                  content="Click a bar to see where a country ranks on that variable"
+                  top="200"
+                  left="500"
+                />
+              </Html>
+            </div>
+            <div class="axis">
+              <Svg>
+                <AxisX />
+                <AxisY textAnchor="end" text_size=".8" spacing="{y_spacing}" />
+              </Svg>
+            </div>
             <Svg>
               <Bars
                 additional_data="{single_country_cut}"
@@ -204,7 +216,7 @@
               .metric_name.replace("*", "")}, {$national_year}
           </h2>
           <span class="rank-subhead"
-            >Rank: {text_sorted.indexOf(
+            >{$country}: {text_sorted.indexOf(
               text_sorted.find((d) => {
                 return d.country_name == $country;
               })
@@ -230,6 +242,7 @@
                   show_tooltip="{show}"
                 />
               {/if}
+              <!-- <Annotation type="rank" /> -->
             </Html>
             <!-- <Svg>
           <AxisX />
@@ -262,6 +275,7 @@
     justify-content: space-between;
     align-items: baseline;
     margin-top: 0rem;
+    min-height: fit-content;
   }
   .metric-container {
     width: 70%;
@@ -315,6 +329,11 @@
     line-height: 1.5em;
   }
 
+  .rank-subhead {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
   .shadow {
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
   }
@@ -352,21 +371,70 @@
     }
   }
 
-  @media screen and (max-width: 1166px) {
+  @media screen and (min-width: 1166px) {
     .chart-container {
-      min-height: 720px;
+      min-height: 680px;
+    }
+
+    .upper {
+      padding-bottom: 1rem;
+    }
+  }
+
+  @media screen and (min-width: 810px) and (max-width: 1166px) {
+    .chart-container {
+      min-height: 710px;
     }
   }
 
   @media screen and (min-width: 768px) and (max-width: 810px) {
     .chart-container {
-      min-height: 770px;
+      min-height: 760px;
     }
   }
 
-  @media screen and (min-width: 400px) {
+  @media screen and (min-width: 415px) and (max-width: 768px) {
     .chart-container {
-      min-height: 750px;
+      min-height: 730px;
+    }
+    .secondary-title {
+      line-height: 1.2rem;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    .annotation {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 415px) {
+    .chart-container {
+      min-height: 810px;
+    }
+
+    .layercake {
+      transform: translate(10px, 0);
+      padding-top: 16px;
+    }
+    .primary-title {
+      margin-bottom: 4px;
+    }
+
+    .upper {
+      display: block;
+    }
+
+    .axis {
+      font-size: 12px;
+    }
+
+    .secondary-title {
+      line-height: 1.3rem;
+    }
+
+    .annotation {
+      display: none;
     }
   }
 </style>

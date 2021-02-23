@@ -228,6 +228,7 @@
   .middle {
     left: 7vw;
     width: 100px;
+    display: none;
   }
 
   .right {
@@ -244,6 +245,7 @@
     margin-top: 2vh;
     width: 20vw;
     height: 2vh;
+
     position: relative;
   }
   .legend2 {
@@ -260,8 +262,8 @@
 
   .cell {
     display: inline-block;
-    width: 30px;
-    min-width: 20px;
+    width: 3%;
+    /* min-width: 2%; */
     min-height: 10px;
     height: 20px;
     max-height: 20px;
@@ -269,6 +271,7 @@
 
   .container {
     height: 80vh;
+    min-width: 1010px;
     cursor: initial;
     display: grid;
     position: relative;

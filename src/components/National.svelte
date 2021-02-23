@@ -26,10 +26,14 @@
 <div class="lower">
   <div class="title-container">
     <h1>Selected Metrics Over Time</h1>
-    <h3>
-      Select two individual metrics at a time to see how they have changed over
-      the years.
-    </h3>
+    {#if screen.width <= 415}
+      <h3>Select a metric to see how it has changed over the years.</h3>
+    {:else}
+      <h3>
+        Select two individual metrics at a time to see how they have changed
+        over the years.
+      </h3>
+    {/if}
   </div>
   <div class="chart">
     <NationalLines />

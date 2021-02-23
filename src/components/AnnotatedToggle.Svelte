@@ -52,4 +52,10 @@
   .right {
     text-align: left;
   }
+
+  @media screen and (max-width: 415px) {
+    .annotation {
+      display: none;
+    }
+  }
 </style>

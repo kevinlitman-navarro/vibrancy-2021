@@ -1,6 +1,6 @@
 <script>
   import Heatmap from "./Heatmap.svelte";
-  import Header from "./Header.svelte";
+  import Meta from "./Meta.svelte";
   import Global from "./Global.svelte";
   import National from "./National.svelte";
   import Methodology from "./Methodology.svelte";
@@ -49,9 +49,7 @@
   $: console.log($toggle);
 </script>
 
-<!-- <section class="header">
-  <Header />
-</section> -->
+<Meta />
 {#if $data}
   <section class="story">
     <section class="global" class:active="{$toggle == 'Global'}">

@@ -64,7 +64,7 @@ p {
 }
 
 text {
-  font-family: "Circular";
+  font-family: var(--source);
 }
 
 input.button {

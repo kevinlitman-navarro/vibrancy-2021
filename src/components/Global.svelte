@@ -35,12 +35,13 @@
     /* max-width: 550px; */
     /* width: 50%; */
   }
+
   .top-right {
     /* width: 50%; */
     /* flex-grow: 1; */
     /* max-width: 550px; */
-    overflow-x: visible;
-    overflow-y: visible;
+    /* overflow-x: visible;
+    overflow-y: visible; */
     height: 100%;
     /* max-height: 100%; */
   }
@@ -64,8 +65,9 @@
     margin: 0 auto;
   }
   .lower {
-    width: calc(100% - 25px);
-    max-width: 1000px;
+    width: 100%;
+    padding: 0 30px;
+    max-width: 1400px;
     margin: 0 auto;
     margin-top: 2rem;
     display: flex;

@@ -82,7 +82,9 @@
   .carrot {
     width: 5px;
   }
-
+  h1.header {
+    color: #3a8dc7;
+  }
   .see-more {
     margin: 0;
     margin-right: 0.5rem;
@@ -130,5 +132,9 @@
 
   .slider-container {
     position: relative;
+  }
+
+  .contents {
+    width: 100%;
   }
 </style>

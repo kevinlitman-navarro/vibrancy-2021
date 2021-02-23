@@ -40,12 +40,19 @@
     });
     country_cut.forEach((d) => {
       temp = {};
-      temp["variable"] = $temporal_metric_1;
+      temp["variable"] = codebook.find((v) => {
+        return v.metric_name == $temporal_metric_1;
+      }).shortname_raw;
       temp["pillar"] = codebook.find((d) => {
-        return d.shortname_raw == $temporal_metric_1;
+        return d.metric_name == $temporal_metric_1;
       }).pillar_1;
       temp["country_name"] = d.CountryName;
-      temp["value"] = d[$temporal_metric_1];
+      temp["value"] =
+        d[
+          codebook.find((v) => {
+            return v.metric_name == $temporal_metric_1;
+          }).shortname_raw
+        ];
       temp["year"] = d.PublishYear;
       if (temp.year && temp.value && temp.value != "-") {
         chart_values1.push(temp);
@@ -64,12 +71,19 @@
 
     country_cut.forEach((d) => {
       temp = {};
-      temp["variable"] = $temporal_metric_2;
+      temp["variable"] = codebook.find((v) => {
+        return v.metric_name == $temporal_metric_2;
+      }).shortname_raw;
       temp["country_name"] = d.CountryName;
       temp["pillar"] = codebook.find((d) => {
-        return d.shortname_raw == $temporal_metric_2;
+        return d.metric_name == $temporal_metric_2;
       }).pillar_1;
-      temp["value"] = d[$temporal_metric_2];
+      temp["value"] =
+        d[
+          codebook.find((v) => {
+            return v.metric_name == $temporal_metric_1;
+          }).shortname_raw
+        ];
       temp["year"] = d.PublishYear;
       if (temp.year && temp.value && temp.value != "-") {
         chart_values2.push(temp);
@@ -103,8 +117,8 @@
       );
     });
     console.log(variable_names);
-    $temporal_metric_1 = variable_names[0];
-    $temporal_metric_2 = variable_names[1];
+    $temporal_metric_1 = display_names[0];
+    $temporal_metric_2 = display_names[1];
     console.log(display_names);
     console.log($temporal_metric_1);
   };
@@ -114,24 +128,31 @@
     show2 = false;
   }
 
-  function handleMouseover1(d) {
+  function handleMouseover1(d, elem) {
     show1 = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = d;
     console.log(d);
+    x_pos = elem.getBoundingClientRect().x;
+    console.log(elem.getBoundingClientRect());
+    y_pos = elem.getBoundingClientRect().y + 22;
   }
-
-  function handleMouseover2(d) {
+  let x_pos;
+  let y_pos;
+  function handleMouseover2(d, elem) {
     show2 = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = d;
     console.log(d);
+    x_pos = elem.getBoundingClientRect().x;
+    console.log(elem.getBoundingClientRect());
+    y_pos = elem.getBoundingClientRect().y + 22;
   }
 
   onMount(() => {
     getVariableNames();
-    $temporal_metric_1 = variable_names[0];
-    $temporal_metric_2 = variable_names[1];
+    $temporal_metric_1 = display_names[0];
+    $temporal_metric_2 = display_names[1];
 
     console.log($data);
 
@@ -153,33 +174,37 @@
 
 {#if mounted}
   <div class="overall-container">
-    <div class="chart-container">
+    <div class="chart-container one">
       <div class="dropdown">
         <p class="annotation">SELECT A METRIC</p>
         <Dropdown
-          items="{variable_names}"
+          items="{display_names}"
           metric1="true"
-          placeholder="{variable_names[0]}"
+          placeholder="{display_names[0]}"
         />
       </div>
       {#if $temporal_metric_1}
         <div class="title-container">
           <Tooltip
-            x="{84}"
-            y="{182}"
-            width="300px"
-            unit="%"
+            x="{x_pos}"
+            y="{y_pos}"
+            width="fit-content"
+            max_width="300px"
+            unit="px"
+            text_align="left"
             show_tooltip="{show1}"
+            position="fixed"
           />
           <h3>
             {codebook
-              .find((d) => d.shortname_raw == $temporal_metric_1)
+              .find((d) => d.metric_name == $temporal_metric_1)
               .metric_name.replace("*", "")
               .replace("Number of ", "")}<span
               on:mouseout="{handleMouseout}"
               on:mouseenter="{handleMouseover1(
-                codebook.find((d) => d.shortname_raw == $temporal_metric_1)
-                  .Definition
+                codebook.find((d) => d.metric_name == $temporal_metric_1)
+                  .Definition,
+                this
               )}"
               ><Icon
                 pointer-events="{true}"
@@ -202,7 +227,7 @@
           data="{chart_values1}"
         >
           <Svg>
-            <AxisX />
+            <AxisX ticks="{[2015, , 2020]}" />
             <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
             <Line />
             <Area />
@@ -210,33 +235,37 @@
         </LayerCake>
       </div>
     </div>
-    <div class="chart-container">
+    <div class="chart-container two">
       <div class="dropdown">
         <p class="annotation">SELECT A METRIC</p>
         <Dropdown
-          items="{variable_names}"
+          items="{display_names}"
           metric2="true"
-          placeholder="{variable_names.slice(-1)[0]}"
+          placeholder="{display_names.slice(-1)[0]}"
         />
       </div>
       {#if $temporal_metric_2}
         <div class="title-container">
           <Tooltip
-            x="{134}"
-            y="{182}"
-            width="300px"
-            unit="%"
+            x="{x_pos}"
+            y="{y_pos}"
+            width="fit-content"
+            max_width="300px"
+            unit="px"
+            text_align="left"
             show_tooltip="{show2}"
+            position="fixed"
           />
           <h3>
             {codebook
-              .find((d) => d.shortname_raw == $temporal_metric_2)
+              .find((d) => d.metric_name == $temporal_metric_2)
               .metric_name.replace("*", "")
               .replace("Number of ", "")}<span
               on:mouseout="{handleMouseout}"
               on:mouseenter="{handleMouseover2(
-                codebook.find((d) => d.shortname_raw == $temporal_metric_2)
-                  .Definition
+                codebook.find((d) => d.metric_name == $temporal_metric_2)
+                  .Definition,
+                this
               )}"
               ><Icon
                 pointer-events="{false}"
@@ -259,7 +288,7 @@
           data="{chart_values2}"
         >
           <Svg>
-            <AxisX gridlines="{false}" />
+            <AxisX gridlines="{false}" ticks="{[2015, , 2020]}" />
             <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
             <Line />
             <Area />
@@ -297,5 +326,15 @@
 
   .annotation {
     font-weight: bold;
+  }
+
+  @media screen and (max-width: 415px) {
+    .chart-container.two {
+      display: none;
+    }
+
+    .chart-container {
+      width: 100%;
+    }
   }
 </style>

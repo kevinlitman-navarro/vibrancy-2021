@@ -13,6 +13,8 @@
   export let dxTick = 0;
   export let dyTick = 0;
   export let axis_position = 1;
+  export let type;
+  export let values;
 
   $: tickVals = Array.isArray(ticks)
     ? ticks
@@ -33,31 +35,35 @@
   }
 </script>
 
-<g class="axis x-axis">
-  {#each tickVals as tick, i}
-    <g
-      class="tick tick-{tick}"
-      transform="translate({$xScale(tick)},{$yRange[0]})"
-    >
-      {#if gridlines !== false}
-        <line y1="{$height * -1}" y2="0" x1="0" x2="0"></line>
-      {/if}
-      <text
-        x="{xTick}"
-        y="{yTick}"
-        dx="{dxTick}"
-        dy="{dyTick}"
-        text-anchor="{textAnchor(i)}"
+{#if type == "heatmap"}
+  <g> </g>
+{:else}
+  <g class="axis x-axis">
+    {#each tickVals as tick, i}
+      <g
+        class="tick tick-{tick}"
+        transform="translate({$xScale(tick)},{$yRange[0]})"
       >
-        {formatTick(tick)}
-      </text>
-    </g>
-  {/each}
-  {#if baseline === true}
-    <line class="baseline" y1="{$height}" y2="{$height}" x1="0" x2="{$width}"
-    ></line>
-  {/if}
-</g>
+        {#if gridlines !== false}
+          <line y1="{$height * -1}" y2="0" x1="0" x2="0"></line>
+        {/if}
+        <text
+          x="{xTick}"
+          y="{yTick}"
+          dx="{dxTick}"
+          dy="{dyTick}"
+          text-anchor="{textAnchor(i)}"
+        >
+          {formatTick(tick)}
+        </text>
+      </g>
+    {/each}
+    {#if baseline === true}
+      <line class="baseline" y1="{$height}" y2="{$height}" x1="0" x2="{$width}"
+      ></line>
+    {/if}
+  </g>
+{/if}
 
 <style>
   .tick {
@@ -83,6 +89,10 @@
     stroke-dasharray: 0;
     stroke: var(--default);
     stroke-opacity: 0.5;
+  }
+
+  text {
+    font-family: var(--source);
   }
 
   @media only screen and (min-width: 640px) {

@@ -2,6 +2,7 @@
   import Slider from "./Slider.svelte";
   import Collapse from "./Collapse.svelte";
   import { variables, global_year } from "../stores/vibrancy.js";
+  import { onMount } from "svelte";
   import { scaleOrdinal } from "d3-scale";
   const seriesNames = ["Reseach and Development", "Economy", "Inclusion*"];
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
@@ -38,6 +39,13 @@
   let isInt = (n) => {
     return parseInt(n) === n;
   };
+  $: console.log(which_clicked);
+  let screenWidth;
+
+  onMount(() => {
+    screenWidth = window.innerWidth;
+    console.log(screenWidth);
+  });
 </script>
 
 <div class="overall">
@@ -85,19 +93,19 @@
           color="{scale(d.metric_name)}"
           name="{d.metric_name}"
         >
+          <!-- style="overflow-y:{d.metric_name == 'Inclusion*'
+              ? 'visible'
+              : 'scroll'};height:{d.metric_name == 'Economy'
+              ? '100px'
+              : '100%'}" -->
           <div
             class="collapsed-sliders"
             headerText="{d.metric_name}"
             color="{scale(d.metric_name)}"
-            style="overflow-y:{d.metric_name == 'Inclusion*'
-              ? 'visible'
-              : 'scroll'};height:{d.metric_name == 'Economy'
-              ? '100px'
-              : '100%'}"
           >
-            <div class="column one">
-              {#each d.metadata as v, i}
-                {#if isInt(i / 2)}
+            {#if screenWidth <= 980}
+              <div class="column">
+                {#each d.metadata as v, i}
                   <div class="slider-container">
                     <div class="slider pillar">
                       <Slider
@@ -109,27 +117,45 @@
                       />
                     </div>
                   </div>
-                {/if}
-              {/each}
-            </div>
+                {/each}
+              </div>
+            {:else}
+              <div class="column one">
+                {#each d.metadata as v, i}
+                  {#if isInt(i / 2)}
+                    <div class="slider-container">
+                      <div class="slider pillar">
+                        <Slider
+                          variable="{v.metric_name}"
+                          name="{v.metric_name}"
+                          id="{v.id}"
+                          multiplier="{v.multiplier}"
+                          on:message="{updateVariable}"
+                        />
+                      </div>
+                    </div>
+                  {/if}
+                {/each}
+              </div>
 
-            <div class="column two">
-              {#each d.metadata as v, i}
-                {#if !isInt(i / 2)}
-                  <div class="slider-container">
-                    <div class="slider pillar">
-                      <Slider
-                        variable="{v.metric_name}"
-                        name="{v.metric_name}"
-                        id="{v.id}"
-                        multiplier="{v.multiplier}"
-                        on:message="{updateVariable}"
-                      />
+              <div class="column two">
+                {#each d.metadata as v, i}
+                  {#if !isInt(i / 2)}
+                    <div class="slider-container">
+                      <div class="slider pillar">
+                        <Slider
+                          variable="{v.metric_name}"
+                          name="{v.metric_name}"
+                          id="{v.id}"
+                          multiplier="{v.multiplier}"
+                          on:message="{updateVariable}"
+                        />
+                      </div>
                     </div>
-                  </div>
-                {/if}
-              {/each}
-            </div>
+                  {/if}
+                {/each}
+              </div>
+            {/if}
           </div>
         </Collapse>
       </div>
@@ -142,14 +168,16 @@
     width: 100%;
     margin-top: 0rem;
     display: flex;
-    overflow-x: visible;
+    /* overflow-x: visible;
     overflow-y: scroll;
 
     height: 100%;
-    max-height: 160px;
+    max-height: 160px; */
     padding-top: 0.2rem;
     padding-right: 0.4rem;
-    padding-bottom: 4rem;
+    /* border: 1px var(--dark-green) solid;
+    background-color: var(--extra-light-green); */
+    /* padding-bottom: 4rem; */
   }
 
   .column {
@@ -165,15 +193,15 @@
   }
 
   .overall {
-    overflow: visible;
+    /* overflow: visible; */
     display: inline-block;
   }
   .container {
     display: flex;
     margin: 0;
-    overflow: visible;
+    /* overflow: visible; */
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
     /* pointer-events: none; */
   }
 

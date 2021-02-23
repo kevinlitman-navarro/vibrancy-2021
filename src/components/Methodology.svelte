@@ -71,18 +71,50 @@
   <div class="overall-container">
     <Collapse headerText="Methodology and Metrics" type="header">
       <div class="upper">
+        <h2>Source</h2>
         <p class="description">
-          Methodology write up for ranking here -- "Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum."
+          The data is collected by AI Index using diverse datasets that are
+          referenced in the 2020 AI Index Report Chapters.
+        </p>
+        <h2>Methodology</h2>
+        <p>
+          <b>Step 1:</b> Obtain, harmonizing, and integrating data on individual
+          attributes across countries and time.<br /><b>Step 2:</b> Use Min-Max
+          Scalar to normalize each country-year specific indicator between
+          0-100.<br /><b>Step 3:</b>
+          Arithmetic Mean per country-indicator for a given year.<br /><b
+            >Step 4:</b
+          > Build modular weighted for available pillars and individual indicators.
+        </p>
+        <h2>Aggregate Measure</h2>
+        <p>
+          The AI Vibrancy Composite Index can be expressed in the following
+          equation: AI Vibrancyc, t = c, t indicator pillar N where, c
+          represents a country and t represents year, c, t is the scaled (0-100)
+          individual indicator, indicator is the weight assigned to individual
+          indicators, pillar is weight specific to one of the three high-level
+          pillars and N is the number of indicators available for a given
+          country for a specific year.
+        </p>
+        <h2>Normalization</h2>
+        <p>
+          To adjust for differences in units of measurement and ranges of
+          variation, all 22 variables were normalised into the [0, 100] range,
+          with higher scores representing better outcomes. A min-max
+          normalisation method was adopted, given the minimum and maximum values
+          of each variable respectively. Higher values indicate better outcomes.
+          The normalisation formula is: Min-max scalar (MS100) =100 * (value) -
+          (min)(max) - (min).
+        </p>
+        <h2>Coverages and Nuances</h2>
+        <p>
+          A threshold of 73% coverage was chosen to select the final list of
+          countries based on an average of available data between 2015-2020.
+          Russia and South Korea were added manually due to their growing
+          importance in the global AI landscape even though they did not pass
+          the 73% threshold.
         </p>
         <h1>Metric Definitions</h1>
-        <p>Read about the variables included in the 2021 AI Index Report.</p>
         {#each $variables as v}
           <ul>
             <li>
@@ -102,10 +134,6 @@
         <div class="title-container">
           <h1>View all of the data</h1>
         </div>
-        <p>
-          Heatmap provides bird's eye view of AI Vibrancy while showing the
-          granularity of each metric.
-        </p>
         <div class="heatmap shadow border-left-primary">
           <div class="chart-upper">
             <div class="title-container">
@@ -189,6 +217,10 @@
     cursor: initial;
   }
 
+  h1 {
+    color: var(--dark-blue);
+  }
+
   .title-container {
     display: inline;
   }
@@ -196,6 +228,7 @@
   .primary-title {
     margin-bottom: 0;
     padding-bottom: 0;
+    color: black;
   }
 
   .secondary-title {
@@ -214,8 +247,21 @@
     margin-left: 2rem;
   }
 
-  .table {
-    width: 100%;
-    margin: 0 auto;
+  @media screen and (max-width: 1010px) {
+    .heatmap {
+      overflow: scroll;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .primary-title {
+      line-height: 1.6rem;
+    }
+  }
+
+  @media screen and (max-width: 415px) {
+    .lower {
+      display: none;
+    }
   }
 </style>

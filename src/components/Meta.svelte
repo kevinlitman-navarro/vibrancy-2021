@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Svelte Starter</title>
+  <title>Global AI Vibrancy Tool</title>
   <meta charset="utf-8" />
   <meta
     name="viewport"

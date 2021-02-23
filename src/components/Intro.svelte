@@ -42,4 +42,10 @@
     padding-top: 0;
     margin-top: 0;
   }
+
+  @media screen and (max-width: 415px) {
+    h1 {
+      font-size: 28px;
+    }
+  }
 </style>

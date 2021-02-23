@@ -3,6 +3,9 @@
   export let name;
   export let multiplier;
   export let id;
+  export let icon = false;
+  import Tooltip from "./Tooltip.svelte";
+  import Icon from "./helpers/Icon.svelte";
   import { variables } from "../stores/vibrancy";
   import { createEventDispatcher } from "svelte";
 
@@ -36,6 +39,10 @@
   <span class="high annotation">High importance</span>
 {/if}
 <!-- <p>{multiplier}</p> -->
+
+{#if icon}
+  <Icon name="" />
+{/if}
 
 <input
   name="{name}"
@@ -87,6 +94,14 @@
     margin-left: 0.2rem;
     padding-left: 0;
   }
+
+  /* input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--dark-green);
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    background: var(--extra-dark-green);
+  } */
 
   .high {
     text-align: left;

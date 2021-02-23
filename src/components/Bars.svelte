@@ -9,9 +9,17 @@
     tooltip_text,
   } from "../stores/vibrancy.js";
 
-  const { data, xGet, xScale, yGet, zGet, yScale, custom, y } = getContext(
-    "LayerCake"
-  );
+  const {
+    data,
+    xGet,
+    flatData,
+    xScale,
+    yGet,
+    zGet,
+    yScale,
+    custom,
+    y,
+  } = getContext("LayerCake");
   export let stacked;
   export let ranked;
   const dispatch = createEventDispatcher();
@@ -22,6 +30,8 @@
   let current_y;
   let pillar;
   let type;
+
+  console.log($flatData);
 
   if (stacked) {
     // initial_range = $yScale.range();
@@ -159,13 +169,25 @@
     opacity: 0.8;
   }
 
-  .group-rect.stacked:hover {
+  /* .group-rect.stacked:hover {
     box-shadow: 0px 2px 10px rgba(191, 178, 162, 0.5);
     opacity: 0.8;
-  }
+  } */
 
   rect.active {
     stroke: black;
     stroke-width: 2px;
+  }
+
+  @media screen and (max-width: 768px) {
+    rect.national:hover {
+    }
+
+    .group-rect.stacked:hover {
+    }
+
+    rect.active {
+      stroke-width: 0px;
+    }
   }
 </style>

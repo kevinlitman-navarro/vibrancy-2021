@@ -56,149 +56,149 @@
     series = stackData(country_cut);
   };
 
-  let method1 = () => {
-    country_cut.forEach((d) => {
-      $variables.forEach((v) => {
-        get_averages = [];
-        if (v.metric_name == "Research and Development") {
-          v.metadata.forEach((x) => {
-            d.metadata.forEach((y) => {
-              try {
-                if ($global_year == y.PublishYear) {
-                  current_key = x.shortname_raw.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_raw] * x.multiplier;
+  // let method1 = () => {
+  //   country_cut.forEach((d) => {
+  //     $variables.forEach((v) => {
+  //       get_averages = [];
+  //       if (v.metric_name == "Research and Development") {
+  //         v.metadata.forEach((x) => {
+  //           d.metadata.forEach((y) => {
+  //             try {
+  //               if ($global_year == y.PublishYear) {
+  //                 current_key = x.shortname_raw.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_raw] * x.multiplier;
 
-                  current_key = x.shortname_scaled.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_scaled] * x.multiplier;
+  //                 current_key = x.shortname_scaled.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_scaled] * x.multiplier;
 
-                  get_averages.push(y[x.shortname_scaled] * x.multiplier);
-                }
-              } catch (error) {}
-            });
-          });
-          d.research_average = mean(get_averages);
-          d["research_average_weighted"] = d.research_average * v.multiplier;
-        } else if (v.metric_name == "Economy") {
-          d["economy_average_weighted"] = d.economy_average * v.multiplier;
-          v.metadata.forEach((x) => {
-            d.metadata.forEach((y) => {
-              try {
-                if ($global_year == y.PublishYear) {
-                  current_key = x.shortname_raw.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_raw] * x.multiplier;
+  //                 get_averages.push(y[x.shortname_scaled] * x.multiplier);
+  //               }
+  //             } catch (error) {}
+  //           });
+  //         });
+  //         d.research_average = mean(get_averages);
+  //         d["research_average_weighted"] = d.research_average * v.multiplier;
+  //       } else if (v.metric_name == "Economy") {
+  //         d["economy_average_weighted"] = d.economy_average * v.multiplier;
+  //         v.metadata.forEach((x) => {
+  //           d.metadata.forEach((y) => {
+  //             try {
+  //               if ($global_year == y.PublishYear) {
+  //                 current_key = x.shortname_raw.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_raw] * x.multiplier;
 
-                  current_key = x.shortname_scaled.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_scaled] * x.multiplier;
-                  get_averages.push(y[x.shortname_scaled] * x.multiplier);
-                }
-              } catch (error) {}
-            });
-          });
-          d.economy_average = mean(get_averages);
-          d["economy_average_weighted"] = d.economy_average * v.multiplier;
-        } else if (v.metric_name == "Inclusion*") {
-          d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
-          v.metadata.forEach((x) => {
-            d.metadata.forEach((y) => {
-              try {
-                if ($global_year == y.PublishYear) {
-                  current_key = x.shortname_raw.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_raw] * x.multiplier;
+  //                 current_key = x.shortname_scaled.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_scaled] * x.multiplier;
+  //                 get_averages.push(y[x.shortname_scaled] * x.multiplier);
+  //               }
+  //             } catch (error) {}
+  //           });
+  //         });
+  //         d.economy_average = mean(get_averages);
+  //         d["economy_average_weighted"] = d.economy_average * v.multiplier;
+  //       } else if (v.metric_name == "Inclusion*") {
+  //         d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
+  //         v.metadata.forEach((x) => {
+  //           d.metadata.forEach((y) => {
+  //             try {
+  //               if ($global_year == y.PublishYear) {
+  //                 current_key = x.shortname_raw.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_raw] * x.multiplier;
 
-                  current_key = x.shortname_scaled.concat(metric_endpoint);
-                  y[current_key] = y[x.shortname_scaled] * x.multiplier;
-                  get_averages.push(y[x.shortname_scaled] * x.multiplier);
-                }
-              } catch (error) {}
-            });
-          });
-          d.inclusion_average = mean(get_averages);
-          d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
-        }
-      });
+  //                 current_key = x.shortname_scaled.concat(metric_endpoint);
+  //                 y[current_key] = y[x.shortname_scaled] * x.multiplier;
+  //                 get_averages.push(y[x.shortname_scaled] * x.multiplier);
+  //               }
+  //             } catch (error) {}
+  //           });
+  //         });
+  //         d.inclusion_average = mean(get_averages);
+  //         d["inclusion_average_weighted"] = d.inclusion_average * v.multiplier;
+  //       }
+  //     });
 
-      d.pillars_used = 0;
-      if (d.inclusion_average_weighted) {
-        d.pillars_used = d.pillars_used + 1;
-      }
-      if (d.economy_average_weighted) {
-        d.pillars_used = d.pillars_used + 1;
-      }
-      if (d.research_average_weighted) {
-        d.pillars_used = d.pillars_used + 1;
-      }
+  //     d.pillars_used = 0;
+  //     if (d.inclusion_average_weighted) {
+  //       d.pillars_used = d.pillars_used + 1;
+  //     }
+  //     if (d.economy_average_weighted) {
+  //       d.pillars_used = d.pillars_used + 1;
+  //     }
+  //     if (d.research_average_weighted) {
+  //       d.pillars_used = d.pillars_used + 1;
+  //     }
 
-      d.total_average = mean([
-        d.inclusion_average_weighted,
-        d.economy_average_weighted,
-        d.research_average_weighted,
-      ]);
+  //     d.total_average = mean([
+  //       d.inclusion_average_weighted,
+  //       d.economy_average_weighted,
+  //       d.research_average_weighted,
+  //     ]);
 
-      country_cut.forEach((d) => {
-        for (let x of [
-          "inclusion_average_weighted",
-          "economy_average_weighted",
-          "research_average_weighted",
-        ]) {
-          if (!d[x]) {
-            d[x] = 0;
-          }
-        }
-      });
+  //     country_cut.forEach((d) => {
+  //       for (let x of [
+  //         "inclusion_average_weighted",
+  //         "economy_average_weighted",
+  //         "research_average_weighted",
+  //       ]) {
+  //         if (!d[x]) {
+  //           d[x] = 0;
+  //         }
+  //       }
+  //     });
 
-      d.total_average =
-        sum([
-          d.inclusion_average_weighted,
-          d.economy_average_weighted,
-          d.research_average_weighted,
-        ]) / d.pillars_used;
+  //     d.total_average =
+  //       sum([
+  //         d.inclusion_average_weighted,
+  //         d.economy_average_weighted,
+  //         d.research_average_weighted,
+  //       ]) / d.pillars_used;
 
-      d.inclusion_share = d.inclusion_average_weighted / d.pillars_used;
-      d.economy_share = d.economy_average_weighted / d.pillars_used;
-      d.research_share = d.research_average_weighted / d.pillars_used;
+  //     d.inclusion_share = d.inclusion_average_weighted / d.pillars_used;
+  //     d.economy_share = d.economy_average_weighted / d.pillars_used;
+  //     d.research_share = d.research_average_weighted / d.pillars_used;
 
-      d.total_sum =
-        d.research_average_weighted +
-        d.economy_average_weighted +
-        d.inclusion_average_weighted;
+  //     d.total_sum =
+  //       d.research_average_weighted +
+  //       d.economy_average_weighted +
+  //       d.inclusion_average_weighted;
 
-      country_cut.forEach((d) => {
-        for (let x of ["inclusion_share", "economy_share", "research_share"]) {
-          if (!d[x]) {
-            d[x] = 0;
-          }
-        }
-      });
-    });
-    console.log(country_cut);
-    usable_country_cut = country_cut.filter((d) => {
-      return (
-        Array.from(d.metadata.map((x) => x.PublishYear)).indexOf($global_year) >
-        -1
-      );
-    });
-    console.log(usable_country_cut);
-    usable_country_cut.forEach((d) => {
-      if (!d.total_average) {
-        d.total_average = 0;
-      }
-    });
-    usable_country_cut = usable_country_cut.filter((d) => {
-      return d.total_average > 0;
-    });
-    usable_country_cut.sort((a, b) =>
-      ascending(a.total_average, b.total_average)
-    );
-    console.log(usable_country_cut);
-    country_names = Array.from(usable_country_cut.map((d) => d.country_name));
+  //     country_cut.forEach((d) => {
+  //       for (let x of ["inclusion_share", "economy_share", "research_share"]) {
+  //         if (!d[x]) {
+  //           d[x] = 0;
+  //         }
+  //       }
+  //     });
+  //   });
+  //   console.log(country_cut);
+  //   usable_country_cut = country_cut.filter((d) => {
+  //     return (
+  //       Array.from(d.metadata.map((x) => x.PublishYear)).indexOf($global_year) >
+  //       -1
+  //     );
+  //   });
+  //   console.log(usable_country_cut);
+  //   usable_country_cut.forEach((d) => {
+  //     if (!d.total_average) {
+  //       d.total_average = 0;
+  //     }
+  //   });
+  //   usable_country_cut = usable_country_cut.filter((d) => {
+  //     return d.total_average > 0;
+  //   });
+  //   usable_country_cut.sort((a, b) =>
+  //     ascending(a.total_average, b.total_average)
+  //   );
+  //   console.log(usable_country_cut);
+  //   country_names = Array.from(usable_country_cut.map((d) => d.country_name));
 
-    stackData = stack().keys(seriesNames);
-    series = stackData(usable_country_cut);
-    if (!data_2020 && $global_year == 2020) {
-      data_2020 = series;
-      console.log(data_2020);
-    }
-  };
+  //   stackData = stack().keys(seriesNames);
+  //   series = stackData(usable_country_cut);
+  //   if (!data_2020 && $global_year == 2020) {
+  //     data_2020 = series;
+  //     console.log(data_2020);
+  //   }
+  // };
 
   let method2 = () => {
     country_cut.forEach((d) => {
@@ -245,7 +245,7 @@
       d.economy_share = d.economy_total / metrics_used;
       d.research_share = d.research_total / metrics_used;
 
-      d.total_sum = d.research_total + d.economy_total + d.inclusion_total;
+      d.share_sum = d.research_share + d.economy_share + d.inclusion_share;
 
       d.total_average =
         (d.research_total + d.economy_total + d.inclusion_total) / metrics_used;
@@ -274,9 +274,7 @@
     usable_country_cut = usable_country_cut.filter((d) => {
       return d.total_average > 0;
     });
-    usable_country_cut.sort((a, b) =>
-      ascending(a.total_average, b.total_average)
-    );
+    usable_country_cut.sort((a, b) => ascending(a.share_sum, b.share_sum));
     console.log(usable_country_cut);
     country_names = Array.from(usable_country_cut.map((d) => d.country_name));
 
@@ -308,10 +306,17 @@
     updateCountryData();
     updateWeights();
     mounted = true;
+    if (screen.width <= 415) {
+      left_padding = 40;
+      y_spacing = 36;
+    }
   });
 
   $: $global_year, updateCountryData(), updateWeights();
   $: $variables, updateWeights();
+
+  let left_padding = 140;
+  let y_spacing = 136;
 </script>
 
 {#if mounted}
@@ -341,27 +346,28 @@
           zScale="{scaleOrdinal()}"
           zDomain="{seriesNames}"
           zRange="{seriesColors}"
+          additional_data="{usable_country_cut}"
           flatData="{flatten(series)}"
           data="{series}"
-          padding="{{ top: 0, right: 0, bottom: 20, left: 140 }}"
+          padding="{{ top: 0, right: 0, bottom: 20, left: left_padding }}"
         >
           <Svg>
             <AxisX axis_position="{global_axis_position}" />
-            <AxisY textAnchor="end" spacing="136" text_size="" />
+            <AxisY textAnchor="end" spacing="{y_spacing}" text_size="" />
           </Svg>
           <Html>
-            <Annotation
-              content="Click a bar to visit that country's profile"
-              top="70"
-              left="470"
-            />
+            {#if usable_country_cut}
+              <Annotation
+                type="global"
+                content="Click a bar to visit that country's profile"
+                top="70"
+                left="470"
+                additional_data="{usable_country_cut}"
+              />
+            {/if}
           </Html>
           <Svg>
-            <Bars
-              additional_data="{country_cut}"
-              stacked="{true}"
-              on:message="{updateTooltip}"
-            />
+            <Bars stacked="{true}" on:message="{updateTooltip}" />
           </Svg>
         </LayerCake>
       </div>
@@ -419,6 +425,10 @@
     margin-top: 0rem;
   }
 
+  text {
+    font-family: var(--source);
+  }
+
   .shadow {
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
   }
@@ -448,13 +458,34 @@
     color: var(--dark-plum);
   }
 
-  @media only screen and (max-width: 634px) {
+  @media only screen and (min-width: 415px) and (max-width: 700px) {
     .chart-container {
-      min-height: 690px;
+      min-height: 700px;
     }
 
     .secondary-title {
       line-height: 1.4rem;
+    }
+  }
+
+  @media only screen and (max-width: 415px) {
+    .chart-container {
+      min-height: 830px;
+    }
+
+    .layercake {
+      transform: translate(36px, 0);
+    }
+    .primary-title {
+      margin-bottom: 4px;
+    }
+
+    .upper {
+      display: block;
+    }
+
+    .secondary-title {
+      line-height: 1.3rem;
     }
   }
 </style>
