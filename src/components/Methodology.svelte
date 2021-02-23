@@ -89,12 +89,21 @@
         <h2>Aggregate Measure</h2>
         <p>
           The AI Vibrancy Composite Index can be expressed in the following
-          equation: AI Vibrancyc, t = pillar c, t indicator N where c represents
-          a country and t represents year, c, t is the scaled (0-100) individual
-          indicator, indicator is the weight assigned to individual indicators,
-          pillar is weight specific to one of the three high-level pillars and N
-          is the number of indicators available for a given country for a
-          specific year.
+          equation:
+        </p>
+        <p class="formula">
+          <i>AI Vibrancy</i><sub>c,t</sub> = ( &Psi;<sub>pillar</sub>
+          &times; [&Omega;<sub>c,t</sub> &times; &Psi;<sub>indicator</sub> ])
+          &divide;
+          <i>N</i>
+        </p>
+        <p>
+          where <i>c</i> represents a country and <i>t</i> represents year,
+          &Omega;<sub>c,t</sub> is the scaled (0-100) individual indicator,
+          &Psi;<sub>indicator</sub> is the weight assigned to individual
+          indicators, &Psi;<sub>pillar</sub> is the weight specific to one of
+          the three high-level pillars and <i>N</i> is the number of indicators available
+          for a given country for a specific year.
         </p>
         <h2>Normalization</h2>
         <p>
@@ -103,8 +112,14 @@
           with higher scores representing better outcomes. A minimum-maximum
           normalization method was adopted, given the minimum and maximum values
           of each variable respectively. Higher values indicate better outcomes.
-          The normalization formula is: Min-max scalar (MS100) =100 * (value) -
-          (min)(max) - (min)
+          The normalization formula is:
+        </p>
+        <p class="formula">
+          <i>Min—max scalar</i> (<i>MS</i>100) = 100 &times; (((<i>value</i>)
+          &minus; (<i>min</i>)) &divide; ((<i>max</i>) &minus; (<i>min</i>)))
+          <!-- <span class="supsub"
+            ><sup>(value) - (min)</sup><sub>(max) - (min)</sub></span
+          > -->
         </p>
         <h2>Coverages and Nuances</h2>
         <p>
@@ -182,6 +197,33 @@
     border-left: 0.25rem solid #a3d2f8 !important;
   }
 
+  .supsub {
+    display: inline-block;
+  }
+
+  .supsub sup,
+  .supsub sub {
+    position: relative;
+    display: block;
+    font-size: 0.5em;
+    line-height: 1.2;
+  }
+
+  .supsub sub {
+    top: 0.3em;
+  }
+
+  sub {
+    font-style: italic;
+  }
+
+  .formula {
+    font-size: 20px;
+    line-height: 2.5rem;
+    text-indent: 2rem;
+    font-weight: bold;
+  }
+
   .metric {
     margin-left: 1rem;
     font-weight: 500;
@@ -247,13 +289,13 @@
     margin-left: 2rem;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: 1080px) {
     .overall-container {
       padding: 0 40px;
     }
   }
 
-  @media screen and (max-width: 1010px) {
+  @media screen and (max-width: 1080px) {
     .heatmap {
       overflow: scroll;
     }

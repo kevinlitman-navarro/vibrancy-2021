@@ -1,5 +1,6 @@
 <script>
   import Slider from "./Slider.svelte";
+  import Icon from "./helpers/Icon.svelte";
   import Collapse from "./Collapse.svelte";
   import { variables, global_year } from "../stores/vibrancy.js";
   import { onMount } from "svelte";
@@ -103,7 +104,7 @@
             headerText="{d.metric_name}"
             color="{scale(d.metric_name)}"
           >
-            {#if screenWidth <= 980}
+            {#if screenWidth <= 1060}
               <div class="column">
                 {#each d.metadata as v, i}
                   <div class="slider-container">
@@ -131,6 +132,7 @@
                           id="{v.id}"
                           multiplier="{v.multiplier}"
                           on:message="{updateVariable}"
+                          icon="true"
                         />
                       </div>
                     </div>
@@ -149,6 +151,7 @@
                           id="{v.id}"
                           multiplier="{v.multiplier}"
                           on:message="{updateVariable}"
+                          icon="true"
                         />
                       </div>
                     </div>

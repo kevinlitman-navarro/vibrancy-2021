@@ -6,9 +6,12 @@
   export let icon = false;
   import Tooltip from "./Tooltip.svelte";
   import Icon from "./helpers/Icon.svelte";
-  import { variables } from "../stores/vibrancy";
+  import { tooltip_text } from "../stores/vibrancy";
   import { createEventDispatcher } from "svelte";
-
+  import codebook from "../data/demo/codebook_3.csv";
+  let x_pos;
+  let y_pos;
+  let show = false;
   const dispatch = createEventDispatcher();
 
   function update(multiplier) {
@@ -20,6 +23,20 @@
   }
 
   $: update(multiplier);
+
+  function handleMouseout() {
+    show = false;
+  }
+
+  function handleMouseover(d, elem) {
+    show = true;
+    // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
+    $tooltip_text = d;
+    console.log(d);
+    x_pos = elem.getBoundingClientRect().x;
+    console.log(elem.getBoundingClientRect());
+    y_pos = elem.getBoundingClientRect().y + 22;
+  }
 </script>
 
 {#if variable != "Research and Development" && variable != "Economy" && variable != "Inclusion*"}
@@ -41,7 +58,25 @@
 <!-- <p>{multiplier}</p> -->
 
 {#if icon}
-  <Icon name="" />
+  <Tooltip
+    x="{x_pos}"
+    y="{y_pos}"
+    width="fit-content"
+    max_width="300px"
+    unit="px"
+    text_align="left"
+    show_tooltip="{show}"
+    position="fixed"
+  />
+  <span
+    on:mouseout="{handleMouseout}"
+    on:mouseenter="{handleMouseover(
+      codebook.find((d) => d.metric_name == name).Definition,
+      this
+    )}"
+  >
+    <Icon name="info" dimension=".7" />
+  </span>
 {/if}
 
 <input

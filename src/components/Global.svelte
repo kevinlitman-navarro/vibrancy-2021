@@ -87,7 +87,7 @@
     margin: 0 auto;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: 1080px) {
     .upper {
       padding: 0 40px;
     }

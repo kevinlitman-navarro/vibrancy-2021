@@ -138,11 +138,11 @@
     margin: 0 auto;
     /* display: flex;
     align-items: center; */
-    margin-bottom: 6rem;
+    /* margin-bottom: 6rem; */
     height: 100%;
   }
 
-  @media only screen and (max-width: 1023px) {
+  @media only screen and (max-width: 1080px) {
     .upper {
       padding: 0 40px;
     }

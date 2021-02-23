@@ -216,7 +216,7 @@
               .metric_name.replace("*", "")}, {$national_year}
           </h2>
           <span class="rank-subhead"
-            >{$country}: {text_sorted.indexOf(
+            ><span class="ranked-country">{$country}</span>: {text_sorted.indexOf(
               text_sorted.find((d) => {
                 return d.country_name == $country;
               })
@@ -234,6 +234,10 @@
             padding="{{ top: 0, right: 0, bottom: 20, left: 0 }}"
           >
             <Html pointerEvents="{false}">
+              <Annotation
+                type="rank"
+                content="Hover over a bar to see which country it represents"
+              />
               {#if type == "rank"}
                 <Tooltip
                   type="rank"
@@ -242,7 +246,6 @@
                   show_tooltip="{show}"
                 />
               {/if}
-              <!-- <Annotation type="rank" /> -->
             </Html>
             <!-- <Svg>
           <AxisX />
@@ -332,6 +335,16 @@
   .rank-subhead {
     margin-top: 0;
     padding-top: 0;
+    color: var(--extra-dark-blue);
+    font-size: 15px;
+  }
+
+  .ranked-country {
+    background-color: var(--light-plum);
+    padding: 1px;
+
+    color: var(--extra-dark-plum);
+    border: 1px var(--dark-plum) solid;
   }
 
   .shadow {
@@ -387,9 +400,15 @@
     }
   }
 
-  @media screen and (min-width: 810px) and (max-width: 1166px) {
+  @media screen and (min-width: 1080px) and (max-width: 1166px) {
     .chart-container {
-      min-height: 710px;
+      min-height: 690px;
+    }
+  }
+
+  @media screen and (min-width: 810px) and (max-width: 1080px) {
+    .chart-container {
+      min-height: 750px;
     }
   }
 

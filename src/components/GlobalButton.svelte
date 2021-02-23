@@ -69,7 +69,13 @@
     border: none;
     color: var(--dark-blue);
     display: block;
+    max-width: 75%;
+    margin: 0 auto;
   }
+
+  /* .button:last-of-type {
+
+  } */
 
   .button-container:first-of-type {
     margin-left: 0px;

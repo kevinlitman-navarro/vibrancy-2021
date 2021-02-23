@@ -65,7 +65,8 @@
   }
 
   .lower {
-    margin-top: 2rem;
+    margin-top: 0;
+    padding-top: 2rem;
     overflow-x: visible;
     overflow-y: scroll;
     max-height: 300px;

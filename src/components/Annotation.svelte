@@ -4,6 +4,7 @@
   export let left;
   export let type;
   export let padding = 5;
+
   export let additional_data;
   import { country } from "../stores/vibrancy.js";
   const {
@@ -18,8 +19,14 @@
     custom,
     y,
   } = getContext("LayerCake");
-  import { getContext, onMount, createEventDispatcher } from "svelte";
+  let mounted = false;
+  onMount(() => {
+    screenWidth = window.innerWidth;
+    mounted = true;
+  });
 
+  import { getContext, onMount, createEventDispatcher } from "svelte";
+  let screenWidth;
   let first;
   console.log(additional_data);
   console.log($xScale.range());
@@ -36,11 +43,17 @@
   $: if (type == "rank") {
     console.log($data);
     console.log($xScale.range());
-    first = $data.find((d) => {
-      return (d.country_name = $country);
-    });
+    console.log(
+      $data.filter((d) => {
+        return d.value <= $xScale.domain()[1] / 2;
+      })
+    );
+    first = $data
+      .filter((d) => {
+        return d.value <= $xScale.domain()[1] / 2;
+      })
+      .slice(-1)[0];
     console.log(first);
-    content = first.country_name;
     console.log($xScale(first.value));
   }
 
@@ -68,16 +81,26 @@
       >
     </div>
   {:else if type == "rank"}
-    <div
-      class="annotation-container"
-      style="top:{$yGet(
-        first
-      )}px;left:{$xScale.range()[1]}px;transform:translate({-$xGet(
-        first
-      )}px,0px)"
-    >
-      <span style="text-align:right" class="annotation">{content}</span>
-    </div>
+    {#if mounted}
+      {#if screenWidth <= 1080}
+        <div
+          class="annotation-container"
+          style="top:{$yGet(first)}px;left:{0}px;width:100px;text-align:left;"
+        >
+          <span style="text-align:right" class="annotation">{content}</span>
+        </div>
+      {:else}
+        <div
+          class="annotation-container"
+          style="top:{$yGet(first)}px;left:{$xScale.range()[1] /
+            2}px;transform:translate({-$xGet(
+            first
+          )}px,0px);width:100px;text-align:right;"
+        >
+          <span style="text-align:right" class="annotation">{content}</span>
+        </div>
+      {/if}
+    {/if}
   {:else}
     <div
       class="annotation-container"

@@ -127,11 +127,11 @@
     {#each $data as d, i}
       <rect
         name="{$y(d)}"
-        class="group-rect"
+        class="group-rect rank"
         data-id="{i}"
         x="{$xScale.range()[1]}"
         y="{$yGet(d)}"
-        fill="{$y(d) == $country ? '#041b33' : '#cccccc'}"
+        fill="{$y(d) == $country ? '#d5a4cb' : '#cccccc'}"
         height="{$yScale.bandwidth()}"
         width="{$xGet(d)}"
         transform="translate({-$xGet(d)},0)"
@@ -169,13 +169,18 @@
     opacity: 0.8;
   }
 
+  rect.rank:hover {
+    box-shadow: 0px 2px 10px rgba(191, 178, 162, 0.5);
+    opacity: 0.7;
+  }
+
   /* .group-rect.stacked:hover {
     box-shadow: 0px 2px 10px rgba(191, 178, 162, 0.5);
     opacity: 0.8;
   } */
 
   rect.active {
-    stroke: black;
+    stroke: var(--extra-dark-blue);
     stroke-width: 2px;
   }
 
