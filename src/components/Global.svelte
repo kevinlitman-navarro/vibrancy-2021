@@ -17,6 +17,13 @@
   <div class="chart">
     <GlobalBars />
   </div>
+  <div class="note">
+    <p>
+      *We created the Inclusion pillar to highlight the importance of diversity
+      in the AI field. Currently, the pillar only includes gender metrics due to
+      the lack of data, but we aim to include more measures in future reports.
+    </p>
+  </div>
 </div>
 
 <style>
@@ -49,15 +56,16 @@
     display: grid;
     grid-auto-columns: minmax(0, 1fr);
     grid-auto-flow: column;
-    grid-gap: 60px;
+    grid-gap: 35px;
     align-items: stretch;
 
     /* justify-content: space-between; */
     overflow-x: visible;
+
     width: 100%;
-    padding: 0 30px;
+    padding: 0 10px;
     /* -25 px */
-    max-width: 1400px;
+    max-width: 1060px;
     /* 1100 px */
     margin-bottom: 3rem;
     height: 100%;
@@ -66,17 +74,27 @@
   }
   .lower {
     width: 100%;
-    padding: 0 30px;
-    max-width: 1400px;
+    padding: 0 10px;
+    max-width: 1060px;
     margin: 0 auto;
     margin-top: 2rem;
-    display: flex;
+    display: block;
     align-items: center;
   }
 
   .chart {
     width: 100%;
     margin: 0 auto;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    .upper {
+      padding: 0 40px;
+    }
+
+    .lower {
+      padding: 0 40px;
+    }
   }
 
   @media only screen and (max-width: 768px) {

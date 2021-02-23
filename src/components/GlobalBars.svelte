@@ -425,10 +425,6 @@
     margin-top: 0rem;
   }
 
-  text {
-    font-family: var(--source);
-  }
-
   .shadow {
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
   }
@@ -458,9 +454,19 @@
     color: var(--dark-plum);
   }
 
+  @media only screen and (min-width: 700px) and (max-width: 750px) {
+    .chart-container {
+      min-height: 680px;
+    }
+
+    .secondary-title {
+      line-height: 1.4rem;
+    }
+  }
+
   @media only screen and (min-width: 415px) and (max-width: 700px) {
     .chart-container {
-      min-height: 700px;
+      min-height: 750px;
     }
 
     .secondary-title {
@@ -470,7 +476,7 @@
 
   @media only screen and (max-width: 415px) {
     .chart-container {
-      min-height: 830px;
+      min-height: 844px;
     }
 
     .layercake {

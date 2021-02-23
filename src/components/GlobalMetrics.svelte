@@ -55,7 +55,8 @@
   h2 {
     margin-bottom: 0px;
     padding-bottom: 0px;
-    color: var(--dark-blue);
+    color: var(--extra-dark-blue);
+    font-weight: normal;
   }
 
   .explanation {
@@ -66,9 +67,17 @@
   .lower {
     margin-top: 2rem;
     overflow-x: visible;
+    overflow-y: scroll;
+    max-height: 300px;
   }
 
   div.buttons > * {
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 415px) {
+    .lower {
+      overflow-x: hidden;
+    }
   }
 </style>

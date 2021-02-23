@@ -10,11 +10,12 @@
 <h1>Global AI Vibrancy Tool</h1>
 <div class="explanation">
   <p>
-    The Global AI Vibrancy Tool compares countries’ activities in the AI
-    industry. It is tempting to provide a single ranking of countries, but such
-    rankings are notoriously tricky. Projecting complex, heterogeneous measures
-    down to a single number (or even a small set of numbers) is fraught with
-    methodological subtleties, and can be highly subjective or skewed.
+    The Global AI Vibrancy Tool is an interactive visualization that allows
+    cross-country comparison for up to 26 countries across 22 indicators. The
+    tool provides transparent evaluation of the relative position of countries
+    based on users’ preference; identifies relevant national indicators to guide
+    policy priorities at a country level; and shows local centers of AI
+    excellence for not just advanced economies but also emerging markets.
   </p>
 
   <p>

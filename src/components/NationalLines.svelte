@@ -10,7 +10,8 @@
     ranked_metric,
     tooltip_text,
   } from "../stores/vibrancy.js";
-  import codebook from "../data/demo/codebook_2.csv";
+  import { format } from "d3-format";
+  import codebook from "../data/demo/codebook_3.csv";
   import Tooltip from "./Tooltip.svelte";
   import Line from "./Line.svelte";
   import Area from "./Area.svelte";
@@ -81,7 +82,7 @@
       temp["value"] =
         d[
           codebook.find((v) => {
-            return v.metric_name == $temporal_metric_1;
+            return v.metric_name == $temporal_metric_2;
           }).shortname_raw
         ];
       temp["year"] = d.PublishYear;
@@ -227,8 +228,20 @@
           data="{chart_values1}"
         >
           <Svg>
-            <AxisX ticks="{[2015, , 2020]}" />
-            <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+            <AxisX
+              ticks="{[
+                chart_values1[0].year,
+                ,
+                chart_values1.slice(-1)[0].year,
+              ]}"
+            />
+            <AxisY
+              formatTick="{(d) => format(',')(d)}"
+              ticks="{4}"
+              textAnchor="end"
+              text_size=".8"
+              spacing="20"
+            />
             <Line />
             <Area />
           </Svg>
@@ -288,8 +301,21 @@
           data="{chart_values2}"
         >
           <Svg>
-            <AxisX gridlines="{false}" ticks="{[2015, , 2020]}" />
-            <AxisY ticks="{4}" textAnchor="end" text_size=".8" spacing="20" />
+            <AxisX
+              gridlines="{false}"
+              ticks="{[
+                chart_values2[0].year,
+                ,
+                chart_values2.slice(-1)[0].year,
+              ]}"
+            />
+            <AxisY
+              formatTick="{(d) => format(',')(d)}"
+              ticks="{4}"
+              textAnchor="end"
+              text_size=".8"
+              spacing="20"
+            />
             <Line />
             <Area />
           </Svg>

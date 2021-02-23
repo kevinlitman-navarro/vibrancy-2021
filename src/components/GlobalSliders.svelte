@@ -193,7 +193,8 @@
   }
 
   .overall {
-    /* overflow: visible; */
+    /* overflow-y: scroll;
+    overflow-x: visible; */
     display: inline-block;
   }
   .container {

@@ -27,7 +27,7 @@ html {
 body {
   line-height: 1.4;
   word-wrap: break-word;
-  color: var(--text-main);
+  color: var(--extra-dark-blue);
   background: var(--background-body);
   font-family: var(--body-font);
   text-rendering: optimizeLegibility;
@@ -61,10 +61,12 @@ p {
   margin: 1rem 0;
   font-family: var(--source);
   font-weight: 400;
+  color: var(--extra-dark-blue);
 }
 
 text {
   font-family: var(--source);
+  color: var(--extra-dark-blue);
 }
 
 input.button {

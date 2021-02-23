@@ -21,17 +21,8 @@
 </div>
 <div class="body">
   <h3>
-    Number of metrics from {$country} in {$national_year}: {$number_of_metrics}
+    <b>{$number_of_metrics} metrics available</b> from {$country} in {$national_year}
   </h3>
-  <p>
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est
-    laborum."
-  </p>
 </div>
 
 <style>
@@ -42,5 +33,11 @@
   .annotation {
     font-weight: bold;
     color: var(--dark-blue);
+  }
+
+  h3 {
+    font-family: var(--source);
+    font-weight: normal;
+    font-size: 22px;
   }
 </style>

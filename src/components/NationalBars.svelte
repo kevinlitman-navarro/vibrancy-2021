@@ -35,7 +35,7 @@
   let ranked_data;
   let ranked_values;
   const dispatch = createEventDispatcher();
-  import codebook from "../data/demo/codebook_2.csv";
+  import codebook from "../data/demo/codebook_3.csv";
 
   const seriesNames = ["Research and Development", "Economy", "Inclusion*"];
 
@@ -371,9 +371,15 @@
     }
   }
 
-  @media screen and (min-width: 1166px) {
+  @media screen and (min-width: 1500px) {
     .chart-container {
-      min-height: 680px;
+      min-height: 800px;
+    }
+  }
+
+  @media screen and (min-width: 1166px) and (max-width: 1500px) {
+    .chart-container {
+      min-height: 710px;
     }
 
     .upper {
@@ -395,7 +401,7 @@
 
   @media screen and (min-width: 415px) and (max-width: 768px) {
     .chart-container {
-      min-height: 730px;
+      min-height: 748px;
     }
     .secondary-title {
       line-height: 1.2rem;

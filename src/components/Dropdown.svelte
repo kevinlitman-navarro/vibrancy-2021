@@ -16,11 +16,13 @@
 </script>
 
 {#if countries}
-  <AutoComplete
-    items="{items}"
-    bind:selectedItem="{$country}"
-    placeholder="{placeholder}"
-  />
+  <div class="country-select">
+    <AutoComplete
+      items="{items}"
+      bind:selectedItem="{$country}"
+      placeholder="{placeholder}"
+    />
+  </div>
 {/if}
 
 {#if metric1}
@@ -40,4 +42,8 @@
 {/if}
 
 <style>
+  .country-select {
+    font-size: 24px;
+    font-family: var(--source);
+  }
 </style>

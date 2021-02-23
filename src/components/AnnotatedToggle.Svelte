@@ -6,7 +6,7 @@
 
 <div class="toggle-container">
   <div class="annotation left">
-    <p>Compare countries across 26 metrics</p>
+    <p>Compare countries across 22 metrics</p>
   </div>
   <div class="toggle-box">
     <div class="eyebrow">SELECT A VIEW</div>

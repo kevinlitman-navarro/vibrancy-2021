@@ -7,7 +7,7 @@
   import { csv } from "d3-fetch";
   import { variables, data, toggle } from "../stores/vibrancy.js";
   import { group } from "d3-array";
-  import codebook from "../data/demo/codebook_2.csv";
+  import codebook from "../data/demo/codebook_3.csv";
   import { onMount } from "svelte";
 
   let variable_names = [];
