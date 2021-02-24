@@ -187,6 +187,7 @@
     margin-top: 2rem;
     margin-bottom: 4rem;
     cursor: initial;
+    font-family: (var(--source));
   }
 
   .shadow {
@@ -195,22 +196,6 @@
 
   .border-left-primary {
     border-left: 0.25rem solid #a3d2f8 !important;
-  }
-
-  .supsub {
-    display: inline-block;
-  }
-
-  .supsub sup,
-  .supsub sub {
-    position: relative;
-    display: block;
-    font-size: 0.5em;
-    line-height: 1.2;
-  }
-
-  .supsub sub {
-    top: 0.3em;
   }
 
   sub {
@@ -227,18 +212,18 @@
   .metric {
     margin-left: 1rem;
     font-weight: 500;
-    font-family: "Source Sans Pro";
+    /* font-family: "Source Sans Pro"; */
   }
 
   p {
     font-weight: 500;
-    font-family: "Source Sans Pro";
+    /* font-family: "Source Sans Pro"; */
   }
 
   .description {
     width: 100%;
     font-weight: 500;
-    font-family: "Source Sans Pro";
+    /* font-family: "Source Sans Pro"; */
   }
   .chart-upper {
     display: flex;
@@ -261,6 +246,7 @@
 
   h1 {
     color: var(--dark-blue);
+    font-family: var(--circular);
   }
 
   .title-container {
