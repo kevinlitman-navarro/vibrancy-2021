@@ -7,6 +7,8 @@
     country,
     toggle,
     tooltip_text,
+    national_year,
+    global_year,
   } from "../stores/vibrancy.js";
 
   const {
@@ -118,6 +120,7 @@
           on:click="{() => {
             $country = $y(d);
             $toggle = 'National';
+            $national_year = $global_year;
           }}"></rect>
       {/each}
     {/each}

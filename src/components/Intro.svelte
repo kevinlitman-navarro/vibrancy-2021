@@ -23,7 +23,7 @@
     user-inputted parameters and a matrix that gives a top-level view of each
     country’s success across selected metrics. The <b>national view</b> includes
     a ranking across all metrics within a selected country and detailed
-    timeseries data going back to 2015 for all available metrics.
+    time-series data going back to 2015 for all available metrics.
     <b>Toggle between views using the buttons below.</b>
   </p>
 </div>

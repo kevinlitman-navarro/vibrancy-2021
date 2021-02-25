@@ -20,8 +20,9 @@
   <div class="note">
     <p>
       *We created the Inclusion pillar to highlight the importance of diversity
-      in the AI field. Currently, the pillar only includes gender metrics due to
-      the lack of data, but we aim to include more measures in future reports.
+      in the AI field. Currently, the pillar only includes gender metrics for
+      2020 due to the lack of data, but we aim to include more measures in
+      future reports.
     </p>
   </div>
 </div>

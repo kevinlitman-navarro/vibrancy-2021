@@ -38,6 +38,12 @@
   <div class="chart">
     <NationalLines />
   </div>
+  <div class="note">
+    <p>
+      *Because only 2020 data is available for both metrics on gender in AI,
+      they do not appear in this view.
+    </p>
+  </div>
 </div>
 
 <style>

@@ -31,8 +31,8 @@
   }
 
   .annotation {
-    font-weight: bold;
-    color: var(--dark-blue);
+    font-weight: normal;
+    color: var(--extra-dark-blue);
   }
 
   h3 {

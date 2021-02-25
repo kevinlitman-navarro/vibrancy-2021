@@ -177,7 +177,7 @@
   <div class="overall-container">
     <div class="chart-container one">
       <div class="dropdown">
-        <p class="annotation">SELECT A METRIC</p>
+        <p class="annotation">SELECT A METRIC*</p>
         <Dropdown
           items="{display_names}"
           metric1="true"
@@ -250,7 +250,7 @@
     </div>
     <div class="chart-container two">
       <div class="dropdown">
-        <p class="annotation">SELECT A METRIC</p>
+        <p class="annotation">SELECT A METRIC*</p>
         <Dropdown
           items="{display_names}"
           metric2="true"

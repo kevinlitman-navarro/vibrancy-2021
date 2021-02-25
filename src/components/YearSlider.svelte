@@ -12,8 +12,10 @@
   let updateYear = () => {
     if ($toggle == "Global" && !methodology) {
       $global_year = year;
+      $national_year = $global_year;
     } else if ($toggle == "National" && !methodology) {
       $national_year = year;
+      $global_year = $national_year;
     } else if (methodology) {
       $methodology_year = year;
     }
@@ -58,16 +60,19 @@
   .top {
     display: inline-block;
     text-align: center;
+    /* align-self: center; */
+    /* position: flex;
+    justify-self: center; */
     /* margin: 0 auto; */
   }
 
   .low {
     text-align: right;
-    transform: translate(-7.4em, 2.4em);
+    transform: translate(-6.6em, 2.4em);
   }
 
   .high {
     text-align: left;
-    transform: translate(0em, 2.4em);
+    transform: translate(1.2em, 2.4em);
   }
 </style>

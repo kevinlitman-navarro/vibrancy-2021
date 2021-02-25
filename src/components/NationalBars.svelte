@@ -187,6 +187,7 @@
                   content="Click a bar to see where a country ranks on that variable"
                   top="200"
                   left="500"
+                  type="national"
                 />
               </Html>
             </div>

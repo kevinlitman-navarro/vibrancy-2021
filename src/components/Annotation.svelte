@@ -31,13 +31,22 @@
   console.log(additional_data);
   console.log($xScale.range());
 
-  $: if (type != "global") {
-    first = $data.filter((d) => {
-      return d.value >= 40;
-    })[0];
+  $: if (type == "national") {
+    first = $data
+      .filter((d) => {
+        return d.value <= 60;
+      })
+      .slice(-1)[0];
     if (!first) {
-      first = $data.slice(-1)[0];
+      first = $data[0];
     }
+    // else if (
+    //   $data.filter((d) => {
+    //     return d.value <= 60;
+    //   }).length == 1
+    // ) {
+    //   first = $data.slice(-2)[0];
+    // }
   }
 
   $: if (type == "rank") {
@@ -71,7 +80,7 @@
 </script>
 
 {#if first}
-  {#if type != "global" && type != "rank"}
+  {#if type == "national"}
     <div
       class="annotation-container"
       style="top:{$yGet(first)}px;left:{$xGet(first) + padding}px;"
