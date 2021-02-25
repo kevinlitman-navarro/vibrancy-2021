@@ -43,9 +43,6 @@
       table_values_scaled.push(temp);
     });
     table_values_scaled = table_values_scaled;
-    // console.log(country_values);
-    console.log($variables);
-    // console.log(filtered);
   };
 
   onMount(() => {

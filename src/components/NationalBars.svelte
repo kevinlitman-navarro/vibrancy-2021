@@ -47,7 +47,6 @@
     single_country_cut = $data.find((d) => {
       return d.CountryName == $country && d.PublishYear == $national_year;
     });
-    console.log(single_country_cut);
 
     $variables.forEach((d) => {
       d.metadata.forEach((v) => {
@@ -82,7 +81,7 @@
       chart_values.push(temp);
     });
     chart_values.sort((a, b) => ascending(a.value, b.value));
-    console.log(chart_values);
+
     $ranked_metric = chart_values.slice(-1)[0].variable;
     // $temporal_metric_1 = chart_values.slice(-1)[0].variable;
     // $temporal_metric_2 = chart_values[0].variable;
@@ -92,7 +91,7 @@
     ranked_data = $data.filter((d) => {
       return d.PublishYear == $national_year;
     });
-    console.log(ranked_data);
+
     ranked_values = [];
     ranked_data.forEach((d) => {
       temp = {};
@@ -107,7 +106,6 @@
     ranked_values.sort((a, b) => ascending(a.value, b.value));
     text_sorted = [...ranked_values].reverse();
     // ranked_values = text_sorted.sort((a, b) => ascending(a.value, b.value));
-    // console.log(text_sorted[0], ranked_values[0]);
   };
 
   let current_x;

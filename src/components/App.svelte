@@ -31,7 +31,6 @@
       });
     });
     variable_names.push("PublishYear");
-    console.log(variable_names);
 
     csv("assets/data/full_data_4.csv").then((raw) => {
       $data = raw;
@@ -42,11 +41,8 @@
           }
         });
       });
-      console.log($variables);
     });
   });
-
-  $: console.log($toggle);
 </script>
 
 <Meta />

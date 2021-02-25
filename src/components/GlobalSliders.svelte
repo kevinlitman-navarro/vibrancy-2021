@@ -9,8 +9,6 @@
   const seriesColors = ["#3a8dc7", "#249499", "#9d5da3"];
   const scale = scaleOrdinal().domain(seriesNames).range(seriesColors);
   let updatePillar = (event) => {
-    console.log("updating");
-    console.log($variables);
     $variables.find((d) => d.metric_name == event.detail.name).multiplier =
       event.detail.multiplier;
     $variables = $variables;
@@ -18,8 +16,6 @@
   // x.find((z) => (z.id = event.detail.id)).multiplier =
   //         event.detail.mulitplier;
   let updateVariable = (event) => {
-    console.log("updating");
-    console.log($variables);
     $variables.forEach((d) => {
       d.metadata.forEach((x) => {
         if (x.id == event.detail.id) {
@@ -40,12 +36,11 @@
   let isInt = (n) => {
     return parseInt(n) === n;
   };
-  $: console.log(which_clicked);
+
   let screenWidth;
 
   onMount(() => {
     screenWidth = window.innerWidth;
-    console.log(screenWidth);
   });
 </script>
 
@@ -59,7 +54,6 @@
             research_clicked = !research_clicked;
             economy_clicked = false;
             inclusion_clicked = false;
-            console.log(research_clicked);
           } else if (d.metric_name == 'Economy') {
             economy_clicked = !economy_clicked;
             research_clicked = false;

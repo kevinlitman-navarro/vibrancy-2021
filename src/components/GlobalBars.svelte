@@ -27,6 +27,7 @@
   let updated_key;
   let get_averages = [];
   let metrics_used;
+  let length;
 
   const seriesNames = ["research_share", "economy_share", "inclusion_share"];
 
@@ -51,7 +52,7 @@
         global_year: $global_year,
       })
     );
-    console.log(country_cut);
+
     stackData = stack().keys(seriesNames);
     series = stackData(country_cut);
   };
@@ -170,14 +171,14 @@
   //       }
   //     });
   //   });
-  //   console.log(country_cut);
+
   //   usable_country_cut = country_cut.filter((d) => {
   //     return (
   //       Array.from(d.metadata.map((x) => x.PublishYear)).indexOf($global_year) >
   //       -1
   //     );
   //   });
-  //   console.log(usable_country_cut);
+
   //   usable_country_cut.forEach((d) => {
   //     if (!d.total_average) {
   //       d.total_average = 0;
@@ -189,14 +190,14 @@
   //   usable_country_cut.sort((a, b) =>
   //     ascending(a.total_average, b.total_average)
   //   );
-  //   console.log(usable_country_cut);
+
   //   country_names = Array.from(usable_country_cut.map((d) => d.country_name));
 
   //   stackData = stack().keys(seriesNames);
   //   series = stackData(usable_country_cut);
   //   if (!data_2020 && $global_year == 2020) {
   //     data_2020 = series;
-  //     console.log(data_2020);
+
   //   }
   // };
 
@@ -258,14 +259,14 @@
         }
       });
     });
-    console.log(country_cut);
+
     usable_country_cut = country_cut.filter((d) => {
       return (
         Array.from(d.metadata.map((x) => x.PublishYear)).indexOf($global_year) >
         -1
       );
     });
-    console.log(usable_country_cut);
+
     usable_country_cut.forEach((d) => {
       if (!d.total_average) {
         d.total_average = 0;
@@ -275,14 +276,23 @@
       return d.total_average > 0;
     });
     usable_country_cut.sort((a, b) => ascending(a.share_sum, b.share_sum));
-    console.log(usable_country_cut);
+
     country_names = Array.from(usable_country_cut.map((d) => d.country_name));
 
     stackData = stack().keys(seriesNames);
     series = stackData(usable_country_cut);
+
+    // length = series[0].length;
+    // if ((length = 0)) {
+    //   length = series[1].length;
+    // }
+
+    // if ((length = 0)) {
+    //   length = series[2].length;
+    // }
+
     if (!data_2020 && $global_year == 2020) {
       data_2020 = series;
-      console.log(data_2020);
     }
   };
 
@@ -367,7 +377,11 @@
             {/if}
           </Html>
           <Svg>
-            <Bars stacked="{true}" on:message="{updateTooltip}" />
+            <Bars
+              stacked="{true}"
+              on:message="{updateTooltip}"
+              length="{length}"
+            />
           </Svg>
         </LayerCake>
       </div>

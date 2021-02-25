@@ -24,13 +24,6 @@
       temp["values"] = values_scaled.map((d) => d[k]);
       temp["variable_name"] = k;
       if ($methodology_year == 2016 && k.includes("Deep Learning")) {
-        console.log(
-          values_scaled
-            .map((d) => d[k])
-            .filter((v) => {
-              return v != "-";
-            })
-        );
         temp["extent"] = extent(
           values_scaled
             .map((d) => d[k])
@@ -60,7 +53,6 @@
       }
       scale_storage.push(temp);
     });
-    console.log(scale_storage);
   };
 
   //["#29162b", "#f4eef4"]
@@ -72,18 +64,11 @@
   $: values_scaled, getScale();
   const range = ["#29162b", "#f4eef4"];
 
-  console.log(countries);
-  console.log(values_scaled);
-  console.log(keys);
-  console.log(data);
-
   function handleMouseout() {
     show = false;
   }
 
   function handleMouseover(c, k, d) {
-    console.log(d);
-
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = "<b>"
       .concat(c)
@@ -102,7 +87,7 @@
       );
 
     x_pos = d["x"];
-    console.log(d["x"]);
+
     y_pos = d["y"] + 22;
     show = true;
   }

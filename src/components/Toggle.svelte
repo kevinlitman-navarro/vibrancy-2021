@@ -7,7 +7,7 @@
   const onChangeLocal = (option) => {
     onChange(option);
     value = option.id;
-    console.log(value);
+
     $toggle = value;
   };
 </script>

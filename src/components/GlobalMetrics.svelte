@@ -7,8 +7,7 @@
   let small_screen = false;
   onMount(() => {
     screenWidth = window.innerWidth;
-    console.log(screenWidth);
-    console.log(screenWidth <= 1040);
+
     small_screen = screenWidth <= 1040;
     mounted = true;
   });

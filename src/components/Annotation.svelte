@@ -28,8 +28,6 @@
   import { getContext, onMount, createEventDispatcher } from "svelte";
   let screenWidth;
   let first;
-  console.log(additional_data);
-  console.log($xScale.range());
 
   $: if (type == "national") {
     first = $data
@@ -50,32 +48,20 @@
   }
 
   $: if (type == "rank") {
-    console.log($data);
-    console.log($xScale.range());
-    console.log(
-      $data.filter((d) => {
-        return d.value <= $xScale.domain()[1] / 2;
-      })
-    );
     first = $data
       .filter((d) => {
         return d.value <= $xScale.domain()[1] / 2;
       })
       .slice(-1)[0];
-    console.log(first);
-    console.log($xScale(first.value));
   }
 
   $: if (type == "global" && additional_data) {
-    console.log(additional_data);
-    console.log($xScale.domain());
     first = additional_data.filter((d) => {
       return d.share_sum >= $xScale.domain()[1] / 2;
     })[0];
     if (additional_data.indexOf(first) == 25) {
       first = additional_data[24];
     }
-    console.log(first);
   }
 </script>
 

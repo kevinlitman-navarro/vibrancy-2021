@@ -32,9 +32,9 @@
     show = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = d;
-    console.log(d);
+
     x_pos = elem.getBoundingClientRect().x;
-    console.log(elem.getBoundingClientRect());
+
     y_pos = elem.getBoundingClientRect().y + 22;
   }
 </script>

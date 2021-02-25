@@ -1,6 +1,7 @@
 <script>
   import { getContext, onMount, createEventDispatcher } from "svelte";
   export let additional_data = [];
+  export let length;
   import { scaleOrdinal, scaleBand } from "d3-scale";
   import {
     ranked_metric,
@@ -33,11 +34,9 @@
   let pillar;
   let type;
 
-  console.log($flatData);
-
   if (stacked) {
     // initial_range = $yScale.range();
-    // console.log(initial_range);
+
     // clamped_scale = scaleBand()
     //   .paddingInner([0.05])
     //   .range(initial_range)
@@ -45,7 +44,7 @@
     // $yScale = clamped_scale;
     clamped_scale = $yScale;
     initial_range = $yScale.range();
-    console.log(initial_range);
+
     clamped_scale = clamped_scale.range(initial_range);
   }
 
@@ -98,11 +97,13 @@
 
     updateMessage();
   }
-
-  console.log($data);
 </script>
 
 {#if stacked}
+  <!-- {#if length == 0}
+    <text>No data available</text>
+    <circle></circle>
+  {:else} -->
   <g class="bar-group stacked">
     {#each $data as series}
       {#each series as d, i}
@@ -125,6 +126,7 @@
       {/each}
     {/each}
   </g>
+  <!-- {/if} -->
 {:else if ranked}
   <g class="bar-group ranked">
     {#each $data as d, i}
@@ -156,7 +158,6 @@
         on:click="{() => {
           $ranked_metric = d.variable;
           $ranked_metric = $ranked_metric;
-          console.log($ranked_metric);
         }}"
         on:mouseenter="{handleMouseoverNational(d)}"
         on:mouseout="{handleMouseout}"

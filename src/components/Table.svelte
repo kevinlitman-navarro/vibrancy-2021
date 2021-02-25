@@ -3,13 +3,12 @@
   export let keys;
   export let mounted;
   import { methodology_year } from "../stores/vibrancy.js";
-  console.log(keys);
+
   let export_data;
-  $: mounted, console.log(keys);
+
   let file;
 
   function download_csv(csv, filename) {
-    console.log(csv);
     let csvFile;
     let downloadLink;
     // CSV FILE
@@ -23,7 +22,7 @@
     downloadLink.href = window.URL.createObjectURL(csvFile);
     // Make sure that the link is not displayed
     downloadLink.style.display = "none";
-    console.log(downloadLink);
+
     // Add the link to your DOM
     document.body.appendChild(downloadLink);
     // Lanzamos
@@ -52,7 +51,6 @@
   document.querySelector("button").addEventListener("click", function () {});
 
   let exportTable = () => {
-    console.log("clicked");
     var html = document.querySelector("table").outerHTML;
     file = $methodology_year.toString().concat("_data.csv");
     export_table_to_csv(export_data, file);

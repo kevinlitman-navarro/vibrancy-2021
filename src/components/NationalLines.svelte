@@ -35,7 +35,7 @@
 
   let updateLines1 = () => {
     chart_values1 = [];
-    console.log($temporal_metric_1);
+
     country_cut = $data.filter((d) => {
       return d.CountryName == $country;
     });
@@ -60,12 +60,11 @@
       }
     });
     chart_values1.sort((a, b) => ascending(a.year, b.year));
-    console.log(chart_values1);
   };
 
   let updateLines2 = () => {
     chart_values2 = [];
-    console.log($temporal_metric_2);
+
     country_cut = $data.filter((d) => {
       return d.CountryName == $country;
     });
@@ -91,7 +90,6 @@
       }
     });
     chart_values2.sort((a, b) => ascending(a.year, b.year));
-    console.log(chart_values2);
   };
 
   let getVariableNames = () => {
@@ -117,11 +115,9 @@
         codebook.find((x) => x.shortname_raw == d).metric_name
       );
     });
-    console.log(variable_names);
+
     $temporal_metric_1 = display_names[0];
     $temporal_metric_2 = display_names[1];
-    console.log(display_names);
-    console.log($temporal_metric_1);
   };
 
   function handleMouseout() {
@@ -133,9 +129,9 @@
     show1 = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = d;
-    console.log(d);
+
     x_pos = elem.getBoundingClientRect().x;
-    console.log(elem.getBoundingClientRect());
+
     y_pos = elem.getBoundingClientRect().y + 22;
   }
   let x_pos;
@@ -144,9 +140,9 @@
     show2 = true;
     // $tooltip_text = $y(d).concat(" : ").concat(Math.round(d.value), 2);
     $tooltip_text = d;
-    console.log(d);
+
     x_pos = elem.getBoundingClientRect().x;
-    console.log(elem.getBoundingClientRect());
+
     y_pos = elem.getBoundingClientRect().y + 22;
   }
 
@@ -154,8 +150,6 @@
     getVariableNames();
     $temporal_metric_1 = display_names[0];
     $temporal_metric_2 = display_names[1];
-
-    console.log($data);
 
     mounted = true;
   });
